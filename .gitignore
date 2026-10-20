@@ -1,0 +1,16 @@
+# Datos del SAE: tienen información personal (teléfonos, nombres, DNI). Nunca subirlos.
+fuentes/*.csv
+*.csv.bak
+
+# Informes generados, controles y modelos en PDF (datos operativos)
+informes/
+modelos/*.pdf
+
+# HTML intermedio del generador (lleva las coordenadas de los positivos)
+plantillas/_*.html
+
+# Dependencias y caché (se reinstalan con instalar.bat)
+scripts/node_modules/
+.cache_navegador/
+__pycache__/
+*.pyc

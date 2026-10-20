@@ -1,0 +1,5 @@
+{
+  "fecha_ampliacion": "2026-07-26",
+  "nota_fecha_ampliacion": "Fecha oficial indicada por la usuaria (20/10/2026). En el SAE las cuadrículas de los barrios nuevos aparecen recién el 30/07/2026. Antes de esta fecha la zona del programa son los 138 barrios originales ('Cobertura Actual' en el KML); desde esta fecha, los 234.",
+  "region_cordoba": {"lat_min": -31.8, "lat_max": -31.1, "lon_min": -64.6, "lon_max": -63.9}
+}

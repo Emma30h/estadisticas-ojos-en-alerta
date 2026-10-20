@@ -1,0 +1,355 @@
+﻿nombre_sistema;barrio_oficial;cuadrante;distrito;metodo;sucesos;pct_dentro_del_poligono;donde_caen_las_coordenadas
+C 5-SAN VICENTE;SAN VICENTE;5 - San Vicente;5;nombre;3062;99%;SAN VICENTE:3033 | PARQUE SAN VICENTE:13 | (fuera de los 234):13
+C 3-ALTA CORDOBA;ALTA CORDOBA;3 - Alta Cordoba;7;nombre;2411;88%;ALTA CORDOBA:2116 | FRATERNIDAD:145 | (fuera de los 234):116
+C 8-GENERAL PAZ;GENERAL PAZ;8 - Pueyrredon;6;nombre;1692;96%;GENERAL PAZ:1621 | BAJO GENERAL PAZ:54 | (fuera de los 234):13
+SAN VICENTE;SAN VICENTE;5 - San Vicente;5;nombre;1523;97%;SAN VICENTE:1471 | (fuera de los 234):33 | PARQUE SAN VICENTE:10
+C 4-YOFRE NORTE;YOFRE NORTE;4 - Yofre;8;nombre;1384;98%;YOFRE NORTE:1351 | (fuera de los 234):12 | YOFRE H:11
+C 8-PUEYRREDON;PUEYRREDON;8 - Pueyrredon;6;nombre;1351;91%;PUEYRREDON:1225 | (fuera de los 234):126
+C 6-JARDIN;JARDÍN;6 - Inaudi;4;nombre;1326;60%;JARDÍN:793 | SAN FERNANDO:242 | IPONÁ:227
+ALTA CORDOBA;ALTA CORDOBA;3 - Alta Cordoba;7;nombre;1159;93%;ALTA CORDOBA:1077 | (fuera de los 234):75 | AYACUCHO:4
+C 2-CERRO DE LAS ROSAS;CERRO DE LAS ROSAS;2 - Urca;15;nombre;1123;65%;CERRO DE LAS ROSAS:725 | (fuera de los 234):196 | VALLE DEL CERRO:138
+GENERAL PAZ;GENERAL PAZ;8 - Pueyrredon;6;nombre;1092;98%;GENERAL PAZ:1066 | (fuera de los 234):19 | JUNIORS:5
+C 1-QUEBRADA DE LAS ROSAS;QUEBRADA DE LAS ROSAS;1 - Quebrada;2;nombre;1076;92%;QUEBRADA DE LAS ROSAS:986 | (fuera de los 234):64 | SAN IGNACIO:17
+C 3-SAN MARTIN;SAN MARTIN;3 - Alta Cordoba;9;nombre;1000;96%;SAN MARTIN:955 | (fuera de los 234):21 | PROVIDENCIA:19
+C 5-EMPALME;EMPALME;5 - San Vicente;21;nombre;974;87%;EMPALME:845 | (fuera de los 234):94 | EMPALME OBREROS Y EMPLEADOS:34
+C 8-JUNIORS;JUNIORS;8 - Pueyrredon;6;nombre;902;91%;JUNIORS:823 | BAJO GENERAL PAZ:48 | GENERAL PAZ:16
+C 2-VILLA CABRERA;VILLA CABRERA;2 - Urca;15;nombre;831;95%;VILLA CABRERA:791 | (fuera de los 234):21 | ALTOS DE SAN MARTIN:13
+C 3-COFICO;COFICO;3 - Alta Cordoba;7;nombre;749;95%;COFICO:712 | INDEPENDENCIA:37
+PUEYRREDON;PUEYRREDON;8 - Pueyrredon;6;nombre;748;89%;PUEYRREDON:665 | (fuera de los 234):82 | GENERAL PAZ:1
+YOFRE NORTE;YOFRE NORTE;4 - Yofre;8;nombre;708;93%;YOFRE NORTE:659 | Yofre Sud:19 | (fuera de los 234):18
+C 5-CRISOL SUR;CRISOL SUR;5 - San Vicente;12;nombre;703;79%;CRISOL SUR:557 | NUEVA CÓRDOBA ANEXO:75 | (fuera de los 234):63
+C 3-PROVIDENCIA;PROVIDENCIA;3 - Alta Cordoba;9;nombre;664;95%;PROVIDENCIA:631 | SAN MARTIN:18 | (fuera de los 234):14
+C 3-INDEPENDENCIA;INDEPENDENCIA;3 - Alta Cordoba;7;nombre;640;96%;INDEPENDENCIA:617 | PUEYRREDON:19 | (fuera de los 234):3
+C 5-COLON;COLON;5 - San Vicente;12;nombre;628;97%;COLON:610 | MAIPU:10 | (fuera de los 234):5
+C 4-TALLERES OESTE;TALLERES OESTE;4 - Yofre;13;nombre;624;89%;TALLERES OESTE:557 | GUAYAQUIL:35 | ALEM:22
+C 3-AYACUCHO;AYACUCHO;3 - Alta Cordoba;13;nombre;589;97%;AYACUCHO:570 | (fuera de los 234):14 | Residencial America:4
+JARDIN;JARDÍN;6 - Inaudi;4;nombre;588;82%;JARDÍN:482 | (fuera de los 234):103 | IPONÁ:3
+C 1-PARQUE DON BOSCO;PARQUE DON BOSCO;1 - Quebrada;2;nombre;582;95%;PARQUE DON BOSCO:551 | (fuera de los 234):31
+C 2-GRANJA DE FUNES;GRANJA DE FUNES;2 - Urca;24;nombre;582;87%;GRANJA DE FUNES:507 | (fuera de los 234):31 | PADRE CLARET:23
+C 7-PARQUE VELEZ SARSFIELD;PARQUE VELEZ SARSFIELD;7 - Caseros;10;nombre;574;92%;PARQUE VELEZ SARSFIELD:526 | COLINA VELEZ SARSFIELD:33 | (fuera de los 234):15
+C 7-COLINAS DE VELEZ SARSFIELD;COLINA VELEZ SARSFIELD;7 - Caseros;10;nombre;574;86%;COLINA VELEZ SARSFIELD:491 | (fuera de los 234):80 | PARQUE VELEZ SARSFIELD:3
+C 4-TALLERES ESTE;TALLERES ESTE;4 - Yofre;13;nombre;554;94%;TALLERES ESTE:519 | TALLERES OESTE:18 | NUEVA ITALIA:9
+ALTO ALBERDI;Alto Alberdi;1 - Quebrada;3;nombre;554;88%;Alto Alberdi:487 | (fuera de los 234):62 | Comandante Espora:3
+QUEBRADA DE LAS ROSAS;QUEBRADA DE LAS ROSAS;1 - Quebrada;2;nombre;517;81%;QUEBRADA DE LAS ROSAS:419 | (fuera de los 234):90 | SAN IGNACIO:6
+VILLA CABRERA;VILLA CABRERA;2 - Urca;15;nombre;475;93%;VILLA CABRERA:444 | (fuera de los 234):21 | ALTOS DE SAN MARTIN:6
+CERRO DE LAS ROSAS;CERRO DE LAS ROSAS;2 - Urca;15;nombre;474;72%;CERRO DE LAS ROSAS:343 | (fuera de los 234):121 | VALLE DEL CERRO:5
+C 7-ALTOS DE VELEZ SARSFIELD;ALTOS DE VELEZ SARSFIELD;7 - Caseros;20;nombre;465;29%;RESIDENCIAL VELEZ SARSFIELD:240 | ALTOS DE VELEZ SARSFIELD:134 | (fuera de los 234):88
+C 2-VILLA BELGRANO;VILLA BELGRANO;2 - Urca;24;nombre;454;94%;VILLA BELGRANO:428 | Arguello:22 | (fuera de los 234):3
+C 1-SAN SALVADOR;SAN SALVADOR;1 - Quebrada;2;nombre;446;92%;SAN SALVADOR:410 | (fuera de los 234):29 | Alto Alberdi:7
+C 7-SAN FRANCISCO;PARQUE SAN FRANCISCO;7 - Caseros;19;nombre;434;34%;PARQUE SAN FRANCISCO:146 | (fuera de los 234):100 | Parque Capital:60
+C 4-NUEVA ITALIA;NUEVA ITALIA;4 - Yofre;8;nombre;430;90%;NUEVA ITALIA:388 | (fuera de los 234):20 | PARQUE MONTECRISTO:9
+C 1-SAN IGNACIO;SAN IGNACIO;1 - Quebrada;2;nombre;429;90%;SAN IGNACIO:388 | (fuera de los 234):21 | LOMAS DEL SUQUÍA:19
+C 1-TEODORO FELDS;TEODORO FELS;1 - Quebrada;2;nombre;413;26%;PALMAS DE HORIZONTE:109 | TEODORO FELS:108 | EL SOLAR:83
+C 6-JARDIN ESPINOSA;JARDÍN ESPINOSA;6 - Inaudi;4;nombre;408;87%;JARDÍN ESPINOSA:355 | (fuera de los 234):39 | JARDINES DEL JOCKEY:12
+SAN MARTIN;SAN MARTIN;3 - Alta Cordoba;9;nombre;408;93%;SAN MARTIN:380 | PROVIDENCIA:12 | (fuera de los 234):6
+PROVIDENCIA;PROVIDENCIA;3 - Alta Cordoba;9;nombre;406;95%;PROVIDENCIA:385 | SAN MARTIN:13 | (fuera de los 234):8
+JUNIORS;JUNIORS;8 - Pueyrredon;6;nombre;396;92%;JUNIORS:363 | GENERAL PAZ:22 | (fuera de los 234):11
+C 2-AMPLIACION URCA;AMPLIACIÓN URCA;2 - Urca;15;nombre;386;66%;AMPLIACIÓN URCA:255 | (fuera de los 234):131
+C 2-POETA LUGONES;POETA LUGONES;2 - Urca;15;nombre;381;97%;POETA LUGONES:370 | Ampliación Poeta Lugones (El Condor):3 | (fuera de los 234):3
+C 5-AMPLIACION EMPALME;AMPLIACIÓN EMPALME;5 - San Vicente;21;nombre;375;97%;AMPLIACIÓN EMPALME:364 | (fuera de los 234):6 | EMPALME OBREROS Y EMPLEADOS:4
+TALLERES ESTE;TALLERES ESTE;4 - Yofre;13;nombre;371;84%;TALLERES ESTE:312 | (fuera de los 234):42 | TALLERES OESTE:12
+TALLERES OESTE;TALLERES OESTE;4 - Yofre;13;nombre;369;78%;TALLERES OESTE:289 | (fuera de los 234):35 | PUEYRREDON:30
+LOS PLATANOS;Los Platanos;7 - Caseros;19;nombre;369;74%;Los Platanos:272 | (fuera de los 234):95 | Juan XXIII:1
+PARQUE VELEZ SARSFIELD;PARQUE VELEZ SARSFIELD;7 - Caseros;10;nombre;367;82%;PARQUE VELEZ SARSFIELD:302 | (fuera de los 234):42 | COLINA VELEZ SARSFIELD:21
+EMPALME;EMPALME;5 - San Vicente;21;nombre;367;84%;EMPALME:309 | (fuera de los 234):44 | EMPALME OBREROS Y EMPLEADOS:14
+COLON;COLON;5 - San Vicente;12;nombre;367;84%;COLON:308 | (fuera de los 234):49 | MAIPU:9
+COFICO;COFICO;3 - Alta Cordoba;7;nombre;365;92%;COFICO:336 | INDEPENDENCIA:15 | (fuera de los 234):9
+C 2-COLINAS DEL CERRO;COLINAS DEL CERRO;2 - Urca;15;nombre;356;92%;COLINAS DEL CERRO:327 | (fuera de los 234):25 | URCA:4
+C 4-VIVERO NORTE;VIVERO NORTE;4 - Yofre;8;nombre;349;97%;VIVERO NORTE:340 | (fuera de los 234):6 | NUEVA ITALIA:3
+C 7-SANTA ISABEL 1 SECCION;SANTA ISABEL 1º SECC.;7 - Caseros;22;nombre;343;98%;SANTA ISABEL 1º SECC.:336 | (fuera de los 234):5 | RESIDENCIAL SUR:2
+C 5-MAIPU 2 - LOURDES;MAIPU 2° SECCIÓN;5 - San Vicente;12;nombre;340;92%;MAIPU 2° SECCIÓN:312 | (fuera de los 234):23 | INDUSTRIAL ESTE:5
+ARGUELLO;Arguello;2 - Urca;24;nombre;332;89%;Arguello:294 | (fuera de los 234):34 | El Refugio:2
+C 4-SANTA CLARA DE ASIS;SANTA CLARA DE ASIS;4 - Yofre;8;nombre;322;55%;SANTA CLARA DE ASIS:177 | PARQUE MONTECRISTO:75 | LA HORTENSIA:61
+PARQUE DON BOSCO;PARQUE DON BOSCO;1 - Quebrada;2;nombre;316;89%;PARQUE DON BOSCO:281 | (fuera de los 234):28 | NATANIA 22:6
+C 6-INAUDI;INAUDI;6 - Inaudi;11;nombre;315;84%;INAUDI:264 | (fuera de los 234):36 | POSTA DE VARGAS:11
+C 5-MAIPU;MAIPU;5 - San Vicente;12;nombre;312;77%;MAIPU:241 | (fuera de los 234):63 | NUEVA CÓRDOBA ANEXO:3
+C 2-ALTO VERDE;ALTO VERDE;2 - Urca;15;nombre;304;81%;ALTO VERDE:246 | (fuera de los 234):52 | SAN LORENZO NORTE:6
+C 5-EMPALME OBREROS Y EMPLEADOS;EMPALME OBREROS Y EMPLEADOS;5 - San Vicente;21;nombre;304;98%;EMPALME OBREROS Y EMPLEADOS:299 | (fuera de los 234):5
+COLINAS DE VELEZ SARSFIELD;COLINA VELEZ SARSFIELD;7 - Caseros;10;nombre;304;77%;COLINA VELEZ SARSFIELD:234 | (fuera de los 234):70
+LAS PALMAS;Las Palmas;1 - Quebrada;2;nombre;293;78%;Las Palmas:230 | (fuera de los 234):57 | René Favaloro:2
+C 5-VILLA ARGENTINA;VILLA ARGENTINA;5 - San Vicente;5;nombre;289;81%;VILLA ARGENTINA:233 | EL MIRADOR:41 | (fuera de los 234):15
+INDEPENDENCIA;INDEPENDENCIA;3 - Alta Cordoba;7;nombre;289;96%;INDEPENDENCIA:276 | (fuera de los 234):6 | PUEYRREDON:6
+LOS NARANJOS;Los Naranjos;7 - Caseros;19;nombre;285;60%;Los Naranjos:172 | (fuera de los 234):112 | El Trebol:1
+C 7-PASO DE LOS ANDES;PASO DE LOS ANDES;7 - Caseros;3;nombre;283;93%;PASO DE LOS ANDES:262 | (fuera de los 234):16 | CUPANI:3
+C 2-URCA;URCA;2 - Urca;15;nombre;280;88%;URCA:245 | (fuera de los 234):20 | COLINAS DEL CERRO:6
+VILLA BELGRANO;VILLA BELGRANO;2 - Urca;24;nombre;277;88%;VILLA BELGRANO:245 | Arguello:27 | (fuera de los 234):4
+C 4-AMPLIACION PALMAR;AMPLIACION PALMAR;4 - Yofre;8;nombre;263;87%;AMPLIACION PALMAR:230 | VILLA CLAUDINA:21 | (fuera de los 234):12
+SAN SALVADOR;SAN SALVADOR;1 - Quebrada;2;nombre;257;82%;SAN SALVADOR:211 | (fuera de los 234):35 | Alto Alberdi:11
+RESIDENCIAL VELEZ SARSFIELD;RESIDENCIAL VELEZ SARSFIELD;7 - Caseros;20;nombre;252;90%;RESIDENCIAL VELEZ SARSFIELD:228 | (fuera de los 234):18 | California:4
+ALTOS DE VELEZ SARSFIELD;ALTOS DE VELEZ SARSFIELD;7 - Caseros;20;nombre;251;18%;(fuera de los 234):204 | ALTOS DE VELEZ SARSFIELD:46 | SANTA MONICA:1
+C 5-PARQUE SAN VICENTE;PARQUE SAN VICENTE;5 - San Vicente;5;nombre;242;94%;PARQUE SAN VICENTE:227 | EL MIRADOR:14 | (fuera de los 234):1
+C 2-ALTOS DE VILLA CABRERA;ALTOS DE VILLA CABRERA;2 - Urca;15;nombre;240;63%;ALTOS DE VILLA CABRERA:152 | (fuera de los 234):62 | VILLA CABRERA:13
+AYACUCHO;AYACUCHO;3 - Alta Cordoba;13;nombre;240;91%;AYACUCHO:219 | (fuera de los 234):15 | Centro América:3
+NUEVA ITALIA;NUEVA ITALIA;4 - Yofre;8;nombre;238;80%;NUEVA ITALIA:191 | (fuera de los 234):39 | TALLERES ESTE:5
+SAN IGNACIO;SAN IGNACIO;1 - Quebrada;2;nombre;238;82%;SAN IGNACIO:195 | (fuera de los 234):33 | LOMAS DEL SUQUÍA:10
+YOFRE SUD;Yofre Sud;4 - Yofre;6;nombre;237;94%;Yofre Sud:222 | (fuera de los 234):15
+CRISOL SUR;CRISOL SUR;5 - San Vicente;12;nombre;236;90%;CRISOL SUR:213 | (fuera de los 234):23
+C 4-YOFRE H;YOFRE H;4 - Yofre;8;nombre;235;86%;YOFRE H:202 | CAPDEVILA DE HORIZONTE:22 | (fuera de los 234):10
+C 2-ALTOS DE SAN MARTIN;ALTOS DE SAN MARTIN;2 - Urca;15;nombre;235;93%;ALTOS DE SAN MARTIN:219 | (fuera de los 234):12 | Las Margaritas:2
+C 2-ESCOBAR;ESCOBAR;2 - Urca;15;nombre;233;94%;ESCOBAR:218 | (fuera de los 234):12 | OMBU:3
+YOFRE H;YOFRE H;4 - Yofre;8;nombre;232;92%;YOFRE H:214 | (fuera de los 234):13 | Yofre I:3
+C 7-CASEROS;CASEROS;7 - Caseros;3;nombre;226;31%;(fuera de los 234):78 | OBRERO:77 | CASEROS:70
+C 1-CHATEAU CARRERAS;CHATEAU CARRERAS;1 - Quebrada;2;nombre;223;79%;CHATEAU CARRERAS:177 | (fuera de los 234):40 | ALTOS DEL CHATEAU:6
+PARQUE CAPITAL;Parque Capital;7 - Caseros;20;nombre;222;80%;Parque Capital:178 | (fuera de los 234):33 | Mariano Balcarce:6
+C 6-VILLA EUCARISTICA;VILLA EUCARISTICA;6 - Inaudi;11;nombre;218;28%;(fuera de los 234):84 | VILLA EUCARISTICA:60 | QUINTAS DE ITALIA:48
+AMPLIACION EMPALME;AMPLIACIÓN EMPALME;5 - San Vicente;21;nombre;217;76%;AMPLIACIÓN EMPALME:166 | (fuera de los 234):46 | EMPALME:4
+GRANJA DE FUNES;GRANJA DE FUNES;2 - Urca;24;nombre;208;84%;GRANJA DE FUNES:175 | (fuera de los 234):31 | PADRE CLARET:2
+C 2-PARQUE CHACABUCO;PARQUE CHACABUCO;2 - Urca;15;nombre;205;49%;PARQUE CHACABUCO:101 | Las Margaritas:88 | ALTOS DE SAN MARTIN:6
+RESIDENCIAL AMERICA;Residencial America;3 - Alta Cordoba;13;nombre;199;98%;Residencial America:196 | (fuera de los 234):3
+C 5-EL MIRADOR;EL MIRADOR;5 - San Vicente;5;nombre;197;91%;EL MIRADOR:179 | (fuera de los 234):15 | VILLA ARGENTINA:2
+C 2-OMBU;OMBU;2 - Urca;15;nombre;196;76%;OMBU:148 | (fuera de los 234):44 | VILLA CABRERA:2
+SAN FERNANDO;SAN FERNANDO;6 - Inaudi;4;nombre;192;83%;SAN FERNANDO:160 | Las Flores:21 | (fuera de los 234):6
+MAIPU 2 - LOURDES;MAIPU 2° SECCIÓN;5 - San Vicente;12;nombre;192;95%;MAIPU 2° SECCIÓN:182 | (fuera de los 234):8 | INDUSTRIAL ESTE:2
+VILLA RIVERA INDARTE;Villa Rivera Indarte;2 - Urca;23;nombre;189;86%;Villa Rivera Indarte:163 | (fuera de los 234):23 | Villa Quizquizacate:2
+C 1-NUEVO URCA;NUEVO URCA;1 - Quebrada;2;nombre;176;94%;NUEVO URCA:165 | (fuera de los 234):8 | GHANDI:3
+COLINAS DEL CERRO;COLINAS DEL CERRO;2 - Urca;15;nombre;176;90%;COLINAS DEL CERRO:158 | (fuera de los 234):18
+VIVERO NORTE;VIVERO NORTE;4 - Yofre;8;nombre;175;86%;VIVERO NORTE:150 | (fuera de los 234):19 | NUEVA ITALIA:4
+MARQUES DE SOBREMONTE;Marques de Sobremonte;3 - Alta Cordoba;9;nombre;175;94%;Marques de Sobremonte:165 | (fuera de los 234):8 | POETA LUGONES:2
+SANTA ISABEL 1Âº SECCION;SANTA ISABEL 1º SECC.;7 - Caseros;22;nombre;174;73%;SANTA ISABEL 1º SECC.:127 | (fuera de los 234):44 | RESIDENCIAL SUR:3
+C 2-ALEJANDRO CENTENO;ALEJANDRO CENTENO;2 - Urca;15;nombre;173;58%;ALEJANDRO CENTENO:101 | VILLA MARTA:60 | (fuera de los 234):10
+EMPALME OBREROS Y EMPLEADOS;EMPALME OBREROS Y EMPLEADOS;5 - San Vicente;21;nombre;173;95%;EMPALME OBREROS Y EMPLEADOS:164 | (fuera de los 234):6 | EMPALME:3
+C 2-BAJO PALERMO;BAJO PALERMO;2 - Urca;15;nombre;172;78%;BAJO PALERMO:135 | (fuera de los 234):30 | CERRO DE LAS ROSAS:3
+C 5-CRISOL NORTE;CRISOL NORTE;5 - San Vicente;12;nombre;172;82%;CRISOL NORTE:141 | (fuera de los 234):20 | INDUSTRIAL ESTE:9
+C 2-CERRO CHICO;CERRO CHICO;2 - Urca;15;nombre;172;63%;CERRO CHICO:108 | (fuera de los 234):55 | ALTO VERDE:4
+MAIPU;MAIPU;5 - San Vicente;12;nombre;172;76%;MAIPU:131 | (fuera de los 234):38 | NUEVA CÓRDOBA ANEXO:3
+C 3-SAN MARTIN ANEXO;SAN MARTIN ANEXO;3 - Alta Cordoba;9;nombre;171;91%;SAN MARTIN ANEXO:155 | (fuera de los 234):10 | LOMAS DE SAN MARTIN:4
+JARDIN ESPINOSA;JARDÍN ESPINOSA;6 - Inaudi;4;nombre;171;71%;JARDÍN ESPINOSA:122 | (fuera de los 234):38 | JARDINES DEL JOCKEY:7
+EL MIRADOR;EL MIRADOR;5 - San Vicente;5;nombre;168;77%;EL MIRADOR:130 | (fuera de los 234):38
+C 4-PALMAR;PALMAR;4 - Yofre;8;nombre;166;93%;PALMAR:154 | (fuera de los 234):8 | VILLA CLAUDINA:4
+OBRERO;OBRERO;7 - Caseros;3;nombre;162;31%;(fuera de los 234):97 | OBRERO:50 | Alto Alberdi:15
+PARQUE LICEO 1 SECCION;Parque Liceo 1;3 - Alta Cordoba;17;nombre;161;100%;Parque Liceo 1:161
+C 7-CAROLA LORENZINI;CAROLA LORENZINI;7 - Caseros;19;nombre;159;8%;AVENIDA:56 | RESIDENCIAL SANTA ANA:55 | (fuera de los 234):23
+SANTA CLARA DE ASIS;SANTA CLARA DE ASIS;4 - Yofre;8;nombre;152;89%;SANTA CLARA DE ASIS:135 | YOFRE NORTE:16 | LA HORTENSIA:1
+CUPANI;CUPANI;7 - Caseros;10;nombre;151;63%;CUPANI:95 | (fuera de los 234):56
+IPONA;IPONÁ;6 - Inaudi;4;nombre;149;88%;IPONÁ:131 | (fuera de los 234):15 | SAN FERNANDO:3
+PASO DE LOS ANDES;PASO DE LOS ANDES;7 - Caseros;3;nombre;146;90%;PASO DE LOS ANDES:131 | CUPANI:7 | (fuera de los 234):7
+AMPLIACION URCA;AMPLIACIÓN URCA;2 - Urca;15;nombre;146;66%;AMPLIACIÓN URCA:97 | (fuera de los 234):49
+C 2-PARQUE TABLADA;PARQUE TABLADA;2 - Urca;15;nombre;142;84%;PARQUE TABLADA:119 | LAS ROSAS:13 | (fuera de los 234):6
+AMPLIACION RESIDENCIAL AMERICA;Ampliación Residencial América;3 - Alta Cordoba;13;nombre;141;82%;Ampliación Residencial América:116 | (fuera de los 234):25
+VILLA EUCARISTIA;VILLA EUCARISTICA;6 - Inaudi;11;nombre;139;28%;(fuera de los 234):65 | VILLA EUCARISTICA:39 | QUINTAS DE ITALIA:25
+PARQUE LICEO 2 SECCION;Parque Liceo 2;3 - Alta Cordoba;17;nombre;139;94%;Parque Liceo 2:131 | (fuera de los 234):8
+C 2-TABLADA PARK;TABLADA PARK;2 - Urca;15;nombre;137;89%;TABLADA PARK:122 | (fuera de los 234):15
+C 7-RESIDENCIAL SUR;RESIDENCIAL SUR;7 - Caseros;22;nombre;137;99%;RESIDENCIAL SUR:136 | (fuera de los 234):1
+VILLA LOS ANGELES;LOS ANGELES;2 - Urca;15;nombre;137;39%;(fuera de los 234):73 | LOS ANGELES:54 | CERRO DE LAS ROSAS:10
+VILLA ARGENTINA;VILLA ARGENTINA;5 - San Vicente;5;nombre;136;72%;VILLA ARGENTINA:98 | (fuera de los 234):31 | EL MIRADOR:7
+C 5-LOS CEIBO;LOS CEIBOS;5 - San Vicente;5;nombre;135;91%;LOS CEIBOS:123 | SAN VICENTE:12
+C 7-UNIVERSITARIO DE HORIZONTE;UNIVERSITARIO DE HORIZONTE;7 - Caseros;22;nombre;134;99%;UNIVERSITARIO DE HORIZONTE:133 | (fuera de los 234):1
+SAN MARTIN NORTE;SAN MARTIN NORTE;3 - Alta Cordoba;9;nombre;134;57%;SAN MARTIN NORTE:76 | Zumaran:38 | (fuera de los 234):16
+C 7-QUINTAS DE SANTA ANA;QUINTAS DE SANTA ANA;7 - Caseros;3;nombre;133;86%;QUINTAS DE SANTA ANA:115 | (fuera de los 234):18
+POETA LUGONES;POETA LUGONES;2 - Urca;15;nombre;133;92%;POETA LUGONES:123 | (fuera de los 234):6 | Nuevo Poeta Lugones:3
+NUEVO URCA;NUEVO URCA;1 - Quebrada;2;nombre;132;79%;NUEVO URCA:104 | (fuera de los 234):25 | GHANDI:3
+INAUDI;INAUDI;6 - Inaudi;11;nombre;127;96%;INAUDI:122 | POSTA DE VARGAS:3 | (fuera de los 234):1
+QUINTAS DEL ARGUELLO;Quintas de Arguello;2 - Urca;24;nombre parecido;127;88%;Quintas de Arguello:112 | (fuera de los 234):13 | Alborada Norte:1
+CENTRO AMERICA;Centro América;3 - Alta Cordoba;13;nombre;127;94%;Centro América:120 | (fuera de los 234):4 | AYACUCHO:2
+C 2-VILLA LOS ANGELES;LOS ANGELES;2 - Urca;15;nombre;126;60%;LOS ANGELES:75 | (fuera de los 234):37 | CERRO DE LAS ROSAS:14
+AMPLIACION PALMAR;AMPLIACION PALMAR;4 - Yofre;8;nombre;126;92%;AMPLIACION PALMAR:116 | (fuera de los 234):7 | VILLA CLAUDINA:3
+ALTOS DE SAN MARTIN;ALTOS DE SAN MARTIN;2 - Urca;15;nombre;126;87%;ALTOS DE SAN MARTIN:109 | (fuera de los 234):15 | SAN LORENZO NORTE:1
+C 8-PATRIA;PATRIA;8 - Pueyrredon;6;nombre;125;66%;PATRIA:82 | (fuera de los 234):33 | GENERAL PAZ:10
+C 2-LAS ROSAS;LAS ROSAS;2 - Urca;15;nombre;125;78%;LAS ROSAS:98 | BAJO PALERMO:11 | (fuera de los 234):11
+LOS PARAISOS;Los Paraisos;3 - Alta Cordoba;9;nombre;124;90%;Los Paraisos:112 | (fuera de los 234):7 | ALTA CORDOBA:2
+ALTO VERDE;ALTO VERDE;2 - Urca;15;nombre;122;81%;ALTO VERDE:99 | (fuera de los 234):18 | SAN LORENZO NORTE:3
+C 1-LOMAS DEL CHATEAU;LOMAS DEL CHATEAU;1 - Quebrada;2;nombre;119;54%;LOMAS DEL CHATEAU:64 | QUEBRADA DE LAS ROSAS:25 | (fuera de los 234):22
+C 6-ROGELIO MARTINEZ;ROGELIO MARTINEZ;6 - Inaudi;4;nombre;118;94%;ROGELIO MARTINEZ:111 | (fuera de los 234):7
+C 5-INDUSTRIAL ESTE;INDUSTRIAL ESTE;5 - San Vicente;12;nombre;118;88%;INDUSTRIAL ESTE:104 | MAIPU 2° SECCIÓN:9 | (fuera de los 234):5
+C 3-SAN MARTIN NORTE;SAN MARTIN NORTE;3 - Alta Cordoba;9;nombre;117;90%;SAN MARTIN NORTE:105 | Zumaran:10 | Marques de Sobremonte:1
+PARQUE SAN VICENTE;PARQUE SAN VICENTE;5 - San Vicente;5;nombre;116;89%;PARQUE SAN VICENTE:103 | (fuera de los 234):9 | EL MIRADOR:4
+C 7-RESIDENCIAL OLIVOS;RESIDENCIAL OLIVOS;7 - Caseros;10;nombre;115;83%;RESIDENCIAL OLIVOS:96 | (fuera de los 234):11 | Parque Capital:8
+PROCREAR LICEO;Procrear Liceo;3 - Alta Cordoba;17;nombre;115;97%;Procrear Liceo:111 | (fuera de los 234):3 | Parque Liceo 2:1
+C 3-LOMAS DE SAN MARTIN;LOMAS DE SAN MARTIN;3 - Alta Cordoba;9;nombre;114;73%;LOMAS DE SAN MARTIN:83 | (fuera de los 234):20 | SAN MARTIN ANEXO:8
+YOFRE I;Yofre I;4 - Yofre;6;nombre;114;90%;Yofre I:103 | Yofre Sud:11
+PARQUE HORIZONTE;Parque Horizonte;7 - Caseros;20;nombre;112;96%;Parque Horizonte:107 | (fuera de los 234):3 | Parque Latino:2
+LAS MARGARITAS;Las Margaritas;2 - Urca;15;nombre;110;92%;Las Margaritas:101 | (fuera de los 234):7 | ALTOS DE SAN MARTIN:1
+C 1-URITORCO;URITORCO;1 - Quebrada;2;nombre;109;94%;URITORCO:102 | (fuera de los 234):5 | Las Palmas:2
+SAN MARTIN ANEXO;SAN MARTIN ANEXO;3 - Alta Cordoba;9;nombre;107;75%;SAN MARTIN ANEXO:80 | (fuera de los 234):15 | Zumaran:9
+C 4-VILLA CLAUDINA;VILLA CLAUDINA;4 - Yofre;8;nombre;106;80%;VILLA CLAUDINA:85 | (fuera de los 234):21
+PARQUE SAN FRANCISCO;PARQUE SAN FRANCISCO;7 - Caseros;19;nombre;102;47%;PARQUE SAN FRANCISCO:48 | (fuera de los 234):25 | Parque Capital:20
+ESCOBAR;ESCOBAR;2 - Urca;15;nombre;102;99%;ESCOBAR:101 | OMBU:1
+C 2-SAN LORENZO NORTE;SAN LORENZO NORTE;2 - Urca;15;nombre;100;82%;SAN LORENZO NORTE:82 | (fuera de los 234):16 | ALTOS DE SAN MARTIN:1
+QUINTAS DE SANTA ANA;QUINTAS DE SANTA ANA;7 - Caseros;3;nombre;100;57%;QUINTAS DE SANTA ANA:57 | (fuera de los 234):43
+MARIANO BALCARCE;Mariano Balcarce;7 - Caseros;20;nombre;100;77%;Mariano Balcarce:77 | (fuera de los 234):23
+PARQUE LATINO;Parque Latino;7 - Caseros;20;nombre;100;91%;Parque Latino:91 | Parque Atlantica:6 | (fuera de los 234):2
+CERRO CHICO;CERRO CHICO;2 - Urca;15;nombre;98;59%;CERRO CHICO:58 | (fuera de los 234):31 | TABLADA PARK:7
+C 6-AMPLIACION JARDIN ESPINOZA;AMP. JARDÍN ESPINOSA;6 - Inaudi;4;nombre;97;38%;JARDINES DEL JOCKEY:55 | AMP. JARDÍN ESPINOSA:37 | (fuera de los 234):5
+URCA;URCA;2 - Urca;15;nombre;97;89%;URCA:86 | (fuera de los 234):7 | PARQUE TABLADA:2
+C 2-PARQUE MODELO;PARQUE MODELO;2 - Urca;24;nombre;96;57%;PARQUE MODELO:55 | VILLA BELGRANO:36 | (fuera de los 234):5
+INDUSTRIAL ESTE;INDUSTRIAL ESTE;5 - San Vicente;12;nombre;96;62%;INDUSTRIAL ESTE:60 | MAIPU 2° SECCIÓN:17 | (fuera de los 234):15
+LA FRATERNIDAD;FRATERNIDAD;3 - Alta Cordoba;7;nombre;95;52%;FRATERNIDAD:49 | (fuera de los 234):42 | ALTA CORDOBA:4
+C 5-KRONFUSS;KRONFUSS;5 - San Vicente;5;nombre;93;73%;KRONFUSS:68 | SAN VICENTE:25
+C 1-GANDHI;GHANDI;1 - Quebrada;2;nombre;93;54%;GHANDI:50 | (fuera de los 234):23 | PARQUE DON BOSCO:14
+TEODORO FELDS;TEODORO FELS;1 - Quebrada;2;nombre;93;25%;(fuera de los 234):40 | TEODORO FELS:23 | PALMAS DE HORIZONTE:18
+PARQUE ATLANTIDA;Parque Atlantica;7 - Caseros;20;nombre parecido;92;84%;Parque Atlantica:77 | (fuera de los 234):15
+PARQUE LOS MOLINOS;Parque los Molinos;7 - Caseros;20;nombre;91;85%;Parque los Molinos:77 | (fuera de los 234):7 | Las Flores:5
+C 6-SANTA RITA;SANTA RITA;6 - Inaudi;4;nombre;90;87%;SANTA RITA:78 | (fuera de los 234):12
+ALTOS DE VILLA CABRERA;ALTOS DE VILLA CABRERA;2 - Urca;15;nombre;90;54%;ALTOS DE VILLA CABRERA:49 | (fuera de los 234):36 | VILLA CABRERA:3
+C 6-LA HUERTILLA;LA HUERTILLA;6 - Inaudi;11;nombre;89;79%;LA HUERTILLA:70 | DOS DE ABRIL:17 | (fuera de los 234):2
+PATRIA;PATRIA;8 - Pueyrredon;6;nombre;88;67%;PATRIA:59 | (fuera de los 234):17 | GENERAL PAZ:12
+CRISOL NORTE;CRISOL NORTE;5 - San Vicente;12;nombre;86;81%;CRISOL NORTE:70 | (fuera de los 234):10 | CRISOL SUR:3
+JORGE NEWBERY;Jorge Newery;3 - Alta Cordoba;17;nombre;86;87%;Jorge Newery:75 | (fuera de los 234):7 | Jeronimo Luis de Cabrera:3
+PARQUE CHACABUCO;PARQUE CHACABUCO;2 - Urca;15;nombre;85;69%;PARQUE CHACABUCO:59 | Las Margaritas:20 | LOMAS DE SAN MARTIN:3
+LOS OLMOS;Los Olmos;7 - Caseros;20;nombre;84;65%;Los Olmos:55 | (fuera de los 234):27 | Parque Latino:2
+ATE;ATE;7 - Caseros;20;nombre;84;86%;ATE:72 | (fuera de los 234):12
+ROGELIO MARTINEZ;ROGELIO MARTINEZ;6 - Inaudi;4;nombre;83;81%;ROGELIO MARTINEZ:67 | (fuera de los 234):16
+BAJO GENERAL PAZ;BAJO GENERAL PAZ;8 - Pueyrredon;6;nombre;83;93%;BAJO GENERAL PAZ:77 | GENERAL PAZ:3 | (fuera de los 234):3
+VALLE DEL CERRO;VALLE DEL CERRO;2 - Urca;15;nombre;83;88%;VALLE DEL CERRO:73 | CERRO DE LAS ROSAS:7 | (fuera de los 234):3
+LAS FLORES;Las Flores;6 - Inaudi;4;nombre;83;77%;Las Flores:64 | (fuera de los 234):19
+MAURIZZI;MAURIZZI;7 - Caseros;10;nombre;82;59%;MAURIZZI:48 | (fuera de los 234):23 | BAJADA SAN ROQUE:9
+AVENIDA;AVENIDA;7 - Caseros;19;nombre;81;75%;AVENIDA:61 | (fuera de los 234):18 | San Rafael:1
+CIUDADELA;Ciudadela;7 - Caseros;20;nombre;81;44%;(fuera de los 234):41 | Ciudadela:36 | RESIDENCIAL VELEZ SARSFIELD:2
+BIALET MIASSE;Bialet Masse;6 - Inaudi;12;nombre parecido;81;83%;Bialet Masse:67 | (fuera de los 234):14
+PARQUE MONTECRISTO;PARQUE MONTECRISTO;4 - Yofre;8;nombre;80;55%;PARQUE MONTECRISTO:44 | Yofre Sud:21 | (fuera de los 234):14
+ALTO PALERMO;ALTO PALERMO;2 - Urca;15;nombre;80;96%;ALTO PALERMO:77 | (fuera de los 234):3
+LOMAS DE SAN MARTIN;LOMAS DE SAN MARTIN;3 - Alta Cordoba;9;nombre;79;71%;LOMAS DE SAN MARTIN:56 | (fuera de los 234):11 | SAN MARTIN:6
+RESIDENCIAL OLIVOS;RESIDENCIAL OLIVOS;7 - Caseros;10;nombre;77;65%;RESIDENCIAL OLIVOS:50 | (fuera de los 234):22 | Parque Capital:4
+ROSEDAL;Rosedal;7 - Caseros;20;nombre;77;83%;Rosedal:64 | (fuera de los 234):13
+TABLADA PARK;TABLADA PARK;2 - Urca;15;nombre;76;75%;TABLADA PARK:57 | (fuera de los 234):16 | ALTO PALERMO:2
+URITORCO;URITORCO;1 - Quebrada;2;nombre;75;65%;URITORCO:49 | (fuera de los 234):19 | Las Palmas:7
+IRUPE;Irupé;7 - Caseros;20;nombre;75;29%;Parque Horizonte:32 | Irupé:22 | (fuera de los 234):21
+NUEVO POETA LUGONES;Nuevo Poeta Lugones;2 - Urca;15;nombre;74;84%;Nuevo Poeta Lugones:62 | Residencial Poeta Lugones:6 | (fuera de los 234):4
+ZUMARAN;Zumaran;3 - Alta Cordoba;9;nombre;74;96%;Zumaran:71 | (fuera de los 234):2 | Pringles:1
+PUENTE BLANCO;Puente Blanco;1 - Quebrada;2;nombre;74;62%;Puente Blanco:46 | (fuera de los 234):27 | René Favaloro:1
+CHATEAU CARRERAS;CHATEAU CARRERAS;1 - Quebrada;2;nombre;72;75%;CHATEAU CARRERAS:54 | (fuera de los 234):16 | ALTOS DEL CHATEAU:2
+OMBU;OMBU;2 - Urca;15;nombre;71;83%;OMBU:59 | (fuera de los 234):9 | BAJO PALERMO:2
+JUAN B JUSTO;Juan B Justo;3 - Alta Cordoba;9;nombre;71;90%;Juan B Justo:64 | (fuera de los 234):7
+C 3-BAJO GALAN;BAJO GALAN;3 - Alta Cordoba;9;nombre;70;77%;BAJO GALAN:54 | VILLA CABRERA:6 | PROVIDENCIA:6
+RESIDENCIAL SUR;RESIDENCIAL SUR;7 - Caseros;22;nombre;69;94%;RESIDENCIAL SUR:65 | (fuera de los 234):4
+LA HUERTILLA;LA HUERTILLA;6 - Inaudi;11;nombre;69;55%;LA HUERTILLA:38 | (fuera de los 234):29 | INAUDI:1
+SARGENTO CABRAL;Sargento Cabral;3 - Alta Cordoba;9;nombre;69;99%;Sargento Cabral:68 | (fuera de los 234):1
+C 2-ALBORADA SUR (JARDIN);ALBORADA SUR;2 - Urca;15;nombre;67;63%;ALBORADA SUR:42 | (fuera de los 234):22 | CERRO CHICO VILLAGE:3
+BAJO PALERMO;BAJO PALERMO;2 - Urca;15;nombre;67;78%;BAJO PALERMO:52 | (fuera de los 234):7 | PARQUE TABLADA:3
+C 7-AMPLIACION VELEZ SASRFIELD - COOP HORIZONTE;AMPLIACION VELEZ SARSFIELD;7 - Caseros;20;nombre;65;92%;AMPLIACION VELEZ SARSFIELD:60 | (fuera de los 234):5
+C 6-PARQUE SAN ANTONIO;PARQUE SAN ANTONIO;6 - Inaudi;11;nombre;65;91%;PARQUE SAN ANTONIO:59 | (fuera de los 234):4 | INAUDI ANEXO:1
+VILLA CENTENARIO;Villa Centenario;2 - Urca;15;nombre;65;72%;Villa Centenario:47 | (fuera de los 234):16 | Parque Corema:1
+SAN LORENZO NORTE;SAN LORENZO NORTE;2 - Urca;15;nombre;64;47%;(fuera de los 234):32 | SAN LORENZO NORTE:30 | ALTO VERDE:1
+SANTA RITA;SANTA RITA;6 - Inaudi;4;nombre;64;36%;(fuera de los 234):37 | SANTA RITA:23 | JARDÍN:4
+PADRE CLARET;PADRE CLARET;2 - Urca;24;nombre;64;67%;PADRE CLARET:43 | (fuera de los 234):13 | Apeadero La Tablada:4
+JARDIN DE HORIZONTE;Jardin de Horizonte;6 - Inaudi;12;nombre;64;69%;Jardin de Horizonte:44 | (fuera de los 234):20
+PARQUE TABLADA;PARQUE TABLADA;2 - Urca;15;nombre;63;71%;PARQUE TABLADA:45 | LAS ROSAS:8 | (fuera de los 234):7
+VILLA QUIZQUIZACATE;Villa Quizquizacate;2 - Urca;24;nombre;63;89%;Villa Quizquizacate:56 | (fuera de los 234):6 | Arguello:1
+VILLA CLAUDINA;VILLA CLAUDINA;4 - Yofre;8;nombre;62;69%;VILLA CLAUDINA:43 | (fuera de los 234):19
+PALMAR;PALMAR;4 - Yofre;8;nombre;62;95%;PALMAR:59 | (fuera de los 234):3
+LOS CEIBO;LOS CEIBOS;5 - San Vicente;5;nombre;62;82%;LOS CEIBOS:51 | (fuera de los 234):6 | SAN VICENTE:5
+ALEJANDRO CENTENO;ALEJANDRO CENTENO;2 - Urca;15;nombre;61;87%;ALEJANDRO CENTENO:53 | (fuera de los 234):7 | VILLA MARTA:1
+CASEROS;CASEROS;7 - Caseros;3;nombre;59;61%;CASEROS:36 | (fuera de los 234):14 | Alto Alberdi:6
+C 4-YOFRE IPV;IPV;4 - Yofre;8;nombre;58;31%;CAPDEVILA DE HORIZONTE:32 | IPV:18 | YOFRE NORTE:6
+RESIDENCIAL SANTA ANA;RESIDENCIAL SANTA ANA;7 - Caseros;19;nombre;58;66%;RESIDENCIAL SANTA ANA:38 | (fuera de los 234):17 | San Rafael:1
+COMANDANTE ESPORA;Comandante Espora;7 - Caseros;19;nombre;57;91%;Comandante Espora:52 | (fuera de los 234):3 | Alto Alberdi:2
+NUEVA CORDOBA ANEXO;NUEVA CÓRDOBA ANEXO;5 - San Vicente;12;nombre;56;79%;NUEVA CÓRDOBA ANEXO:44 | (fuera de los 234):8 | CRISOL SUR:3
+SAN MARCELO;SAN MARCELO;2 - Urca;15;nombre;56;14%;(fuera de los 234):47 | SAN MARCELO:8 | Villa Centenario:1
+C 5-VILLA LA MATERNIDAD;LA MATERNIDAD;5 - San Vicente;5;nombre;53;0%;SAN VICENTE:53
+UNIVERSITARIO DE HORIZONTE;UNIVERSITARIO DE HORIZONTE;7 - Caseros;22;nombre;53;92%;UNIVERSITARIO DE HORIZONTE:49 | (fuera de los 234):4
+LAS ROSAS;LAS ROSAS;2 - Urca;15;nombre;52;90%;LAS ROSAS:47 | BAJO PALERMO:4 | ESCOBAR:1
+RIVERA INDARTE;Rivera Indarte;2 - Urca;24;nombre;52;77%;Rivera Indarte:40 | (fuera de los 234):12
+C 2-ALTO PALERMO;ALTO PALERMO;2 - Urca;15;nombre;50;72%;ALTO PALERMO:36 | (fuera de los 234):14
+AMP VELEZ SARSFIELD - COOP HORIZONTE;AMPLIACION VELEZ SARSFIELD;7 - Caseros;20;nombre;50;54%;AMPLIACION VELEZ SARSFIELD:27 | (fuera de los 234):16 | Parque Latino:6
+SAN RAFAEL;San Rafael;7 - Caseros;19;nombre;49;88%;San Rafael:43 | (fuera de los 234):6
+LAS DALIAS;Las Dalias;1 - Quebrada;2;nombre;49;88%;Las Dalias:43 | Las Palmas:3 | (fuera de los 234):3
+GRANADEROS PRINGLES;Pringles;3 - Alta Cordoba;9;nombre;48;69%;Pringles:33 | (fuera de los 234):9 | Sargento Cabral:3
+DUCASSE;DUCASSE;3 - Alta Cordoba;9;nombre;47;100%;DUCASSE:47
+C 3-DUCASSE;DUCASSE;3 - Alta Cordoba;9;nombre;46;87%;DUCASSE:40 | (fuera de los 234):3 | PROVIDENCIA:2
+POSTA DE VARGAS;POSTA DE VARGAS;6 - Inaudi;11;nombre;46;89%;POSTA DE VARGAS:41 | (fuera de los 234):4 | INAUDI:1
+AMPLIACION SAN FERNANDO;Ampliación San Fernando;6 - Inaudi;4;nombre;46;67%;Ampliación San Fernando:31 | (fuera de los 234):13 | Las Flores:2
+EL TREBOL;El Trebol;7 - Caseros;19;nombre;45;98%;El Trebol:44 | (fuera de los 234):1
+SMATA 1;SMATA;7 - Caseros;20;nombre;45;93%;SMATA:42 | (fuera de los 234):2 | SMATA 2:1
+TRAVIARIOS;Tranviarios;1 - Quebrada;3;nombre parecido;44;80%;Tranviarios:35 | (fuera de los 234):9
+C 1-ALTOS DEL CHATEAU;ALTOS DEL CHATEAU;1 - Quebrada;2;nombre;43;93%;ALTOS DEL CHATEAU:40 | (fuera de los 234):3
+HORTENSIA;LA HORTENSIA;4 - Yofre;8;nombre;43;93%;LA HORTENSIA:40 | PARQUE MONTECRISTO:2 | SANTA CLARA DE ASIS:1
+GENERAL ARTIGAS;General Artigas;6 - Inaudi;11;nombre;43;72%;General Artigas:31 | (fuera de los 234):9 | Ampliación General Artigas:3
+C 7-BAJADA SAN ROQUE;BAJADA SAN ROQUE;7 - Caseros;10;nombre;42;83%;BAJADA SAN ROQUE:35 | (fuera de los 234):7
+C 2-SAN MARCELO;SAN MARCELO;2 - Urca;15;nombre;41;61%;SAN MARCELO:25 | (fuera de los 234):16
+JERONIMO LUIS DE CABRERA;Jeronimo Luis de Cabrera;3 - Alta Cordoba;17;nombre;41;76%;Jeronimo Luis de Cabrera:31 | Juan B Justo:9 | (fuera de los 234):1
+C 6-POSTA DE VARGAS;POSTA DE VARGAS;6 - Inaudi;11;nombre;40;92%;POSTA DE VARGAS:37 | (fuera de los 234):3
+AMPLIACION GENERAL ARTIGAS;Ampliación General Artigas;6 - Inaudi;11;nombre;38;82%;Ampliación General Artigas:31 | (fuera de los 234):6 | Jardin Hipodromo:1
+GANDHI;GHANDI;1 - Quebrada;2;nombre;37;49%;GHANDI:18 | (fuera de los 234):13 | NUEVO URCA:3
+RENE FAVALORO;René Favaloro;1 - Quebrada;2;nombre;37;76%;René Favaloro:28 | (fuera de los 234):7 | Tranviarios:2
+ALBORADA SUR (JARDIN);ALBORADA SUR;2 - Urca;15;nombre;36;83%;ALBORADA SUR:30 | (fuera de los 234):4 | CERRO CHICO VILLAGE:2
+VILLA MARTA;VILLA MARTA;2 - Urca;15;nombre;36;64%;VILLA MARTA:23 | (fuera de los 234):10 | Villa Centenario:2
+COUNTRY JARDINES DEL JOCKEY CLUB;JARDINES DEL JOCKEY;6 - Inaudi;4;nombre;36;69%;JARDINES DEL JOCKEY:25 | (fuera de los 234):11
+NUEVO JARDIN;Nuevo Jardin;6 - Inaudi;12;nombre;36;56%;Nuevo Jardin:20 | (fuera de los 234):16
+GUAYAQUIL;GUAYAQUIL;4 - Yofre;13;nombre;34;74%;GUAYAQUIL:25 | (fuera de los 234):6 | TALLERES OESTE:2
+EL SOLAR;EL SOLAR;1 - Quebrada;2;nombre;34;59%;EL SOLAR:20 | (fuera de los 234):9 | TEODORO FELS:4
+YOFRE IPV;IPV;4 - Yofre;8;nombre;33;21%;CAPDEVILA DE HORIZONTE:20 | IPV:7 | (fuera de los 234):5
+LOMAS DEL CHATEAU;LOMAS DEL CHATEAU;1 - Quebrada;2;nombre;33;76%;LOMAS DEL CHATEAU:25 | (fuera de los 234):7 | ALTOS DEL CHATEAU:1
+POLIGONO 26;;;;SIN RESOLVER;32;0%;(fuera de los 234):17 | VILLA EUCARISTICA:10 | RESID. SAN ANTONIO:5
+AMPLIACION LAS PALMAS;Ampliación Las Palmas;1 - Quebrada;2;nombre;32;53%;Ampliación Las Palmas:17 | (fuera de los 234):9 | Las Palmas:6
+BAJO GALAN;BAJO GALAN;3 - Alta Cordoba;9;nombre;30;73%;BAJO GALAN:22 | VILLA CABRERA:7 | SAN MARTIN:1
+JUAN XIII;Juan XXIII;7 - Caseros;19;nombre;30;90%;Juan XXIII:27 | Comandante Espora:1 | El Trebol:1
+SAN DANIEL;San Daniel;7 - Caseros;20;nombre;29;93%;San Daniel:27 | California:1 | RESIDENCIAL VELEZ SARSFIELD:1
+EL CONDOR;Ampliación Poeta Lugones (El Condor);2 - Urca;15;coordenadas;29;93%;Ampliación Poeta Lugones (El Condor):27 | Ampliación Poeta Lugones (Residencial 2):1 | Los Principios:1
+RESIDENCIAL LUGONES;Residencial Poeta Lugones;2 - Urca;15;nombre parecido;27;85%;Residencial Poeta Lugones:23 | (fuera de los 234):2 | Ampliación Poeta Lugones (El Condor):1
+MUTUAL DOCENTE;Mutual del Docente;7 - Caseros;20;nombre parecido;26;92%;Mutual del Docente:24 | SMATA 2:1 | (fuera de los 234):1
+GRANJA DE CLARET;GRANJA DE CLARET;2 - Urca;14;nombre;25;28%;(fuera de los 234):8 | GRANJA DE FUNES:7 | GRANJA DE CLARET:7
+JARDIN HIPODROMO;Jardin Hipodromo;6 - Inaudi;11;nombre;25;56%;Jardin Hipodromo:14 | (fuera de los 234):8 | Tejas del Sur:3
+LASALLE;Lasalle;2 - Urca;24;nombre;24;79%;Lasalle:19 | Villa Solferino:3 | Arguello:2
+SANTA MONICA;SANTA MONICA;7 - Caseros;20;nombre;23;61%;SANTA MONICA:14 | (fuera de los 234):9
+CALIFORNIA;California;7 - Caseros;20;nombre;23;96%;California:22 | (fuera de los 234):1
+MARQUES DE SOBREMONTE II;Procrear;3 - Alta Cordoba;9;nombre;23;13%;(fuera de los 234):20 | Procrear:3
+C 6-INAUDI ANEXO;INAUDI ANEXO;6 - Inaudi;11;nombre;21;81%;INAUDI ANEXO:17 | (fuera de los 234):4
+C 1-NATANIA 22;NATANIA 22;1 - Quebrada;2;nombre;21;71%;NATANIA 22:15 | NATANIA 19:6
+LOMAS DEL SUQUIA;LOMAS DEL SUQUÍA;1 - Quebrada;2;nombre;21;76%;LOMAS DEL SUQUÍA:16 | EL SOLAR:3 | (fuera de los 234):1
+JARDIN DEL SUR;Jardin del Sur;6 - Inaudi;12;nombre;21;33%;Jardin de Horizonte:8 | Jardin del Sur:7 | (fuera de los 234):6
+CAROLA LORENZINI;CAROLA LORENZINI;7 - Caseros;19;nombre;20;30%;Parque Capital:11 | CAROLA LORENZINI:6 | (fuera de los 234):3
+KRONFUSS;KRONFUSS;5 - San Vicente;5;nombre;20;100%;KRONFUSS:20
+COUNTRY JOCKEY CLUB;JARDINES DEL JOCKEY;6 - Inaudi;4;coordenadas;20;100%;JARDINES DEL JOCKEY:20
+PRIMERA JUNTA;Primera Junta;7 - Caseros;19;nombre;20;85%;Primera Junta:17 | (fuera de los 234):3
+C 2-CERRO CHICO VILLAGE;CERRO CHICO VILLAGE;2 - Urca;15;nombre;19;79%;CERRO CHICO VILLAGE:15 | (fuera de los 234):4
+COUNTRY QUINTAS DE ITALIA;QUINTAS DE ITALIA;6 - Inaudi;11;nombre;19;100%;QUINTAS DE ITALIA:19
+LEANDRO N. ALEM;ALEM;4 - Yofre;13;nombre;19;21%;(fuera de los 234):9 | TALLERES OESTE:6 | ALEM:4
+PARQUE MODELO;PARQUE MODELO;2 - Urca;24;nombre;19;79%;PARQUE MODELO:15 | (fuera de los 234):3 | VILLA BELGRANO:1
+PARQUE COREMA;Parque Corema;2 - Urca;15;nombre;19;63%;Parque Corema:12 | (fuera de los 234):7
+EL REFUGIO;El Refugio;2 - Urca;24;nombre;18;89%;El Refugio:16 | Arguello:1 | Lasalle:1
+SAN JOSE;San Jose;2 - Urca;24;nombre;18;89%;San Jose:16 | Arguello:2
+TEJAS DEL SUR;Tejas del Sur;6 - Inaudi;11;nombre;18;39%;(fuera de los 234):9 | Tejas del Sur:7 | Jardin Hipodromo:2
+AMPLIACION JARDIN ESPINOZA;AMP. JARDÍN ESPINOSA;6 - Inaudi;4;nombre;17;76%;AMP. JARDÍN ESPINOSA:13 | (fuera de los 234):4
+SANTA CECILIA;Santa Cecilia;2 - Urca;15;nombre;17;88%;Santa Cecilia:15 | (fuera de los 234):2
+RESIDENCIAL CHATEAU CARRERAS;RESIDENCIAL CHATEAU CARRERAS;1 - Quebrada;2;nombre;16;62%;RESIDENCIAL CHATEAU CARRERAS:10 | (fuera de los 234):6
+PARQUE SAN ANTONIO;PARQUE SAN ANTONIO;6 - Inaudi;11;nombre;16;75%;PARQUE SAN ANTONIO:12 | INAUDI:3 | (fuera de los 234):1
+APEADERO LA TABLADA;Apeadero La Tablada;2 - Urca;14;nombre;16;100%;Apeadero La Tablada:16
+SMATA 2;SMATA 2;7 - Caseros;20;nombre;16;81%;SMATA 2:13 | (fuera de los 234):3
+C 1-RESIDENCIAL CHATEAU CARRERAS;RESIDENCIAL CHATEAU CARRERAS;1 - Quebrada;2;nombre;14;93%;RESIDENCIAL CHATEAU CARRERAS:13 | (fuera de los 234):1
+C 7-PARQUE UNIVERSIDAD;PARQUE UNIVERSITARIO;7 - Caseros;22;nombre;14;93%;PARQUE UNIVERSITARIO:13 | (fuera de los 234):1
+PALMAS DE HORIZONTE;PALMAS DE HORIZONTE;1 - Quebrada;2;nombre;14;71%;PALMAS DE HORIZONTE:10 | (fuera de los 234):4
+VILLA SAN ISIDRO;Villa San Isidro;6 - Inaudi;4;nombre;14;50%;Villa San Isidro:7 | (fuera de los 234):4 | Ampliación San Fernando:3
+C 7-SANTA MONICA;SANTA MONICA;7 - Caseros;20;nombre;13;69%;SANTA MONICA:9 | (fuera de los 234):4
+COVIPOL;Covipol;1 - Quebrada;2;nombre;13;23%;Las Dalias:7 | Covipol:3 | Las Palmas:3
+VILLA SOLFERINO;Villa Solferino;2 - Urca;24;nombre;13;85%;Villa Solferino:11 | (fuera de los 234):1 | Arguello:1
+INAUDI ANEXO;INAUDI ANEXO;6 - Inaudi;11;nombre;12;83%;INAUDI ANEXO:10 | (fuera de los 234):2
+VILLA CLARET;Villa Claret;2 - Urca;14;nombre;12;92%;Villa Claret:11 | (fuera de los 234):1
+RINCON BONITO;Rincón Bonito;2 - Urca;24;nombre;11;73%;Rincón Bonito:8 | (fuera de los 234):2 | San Jose:1
+ALTOS DEL CHATEAU;ALTOS DEL CHATEAU;1 - Quebrada;2;nombre;10;80%;ALTOS DEL CHATEAU:8 | (fuera de los 234):2
+COMISARIA 23B (EX 25 (SALDAN));;;;SIN RESOLVER;10;0%;(fuera de los 234):10
+NATANIA 22;NATANIA 22;1 - Quebrada;2;nombre;10;100%;NATANIA 22:10
+C 6-HOUSING LA GIGENA;HOUSING GIGENA;6 - Inaudi;11;nombre;8;50%;HOUSING GIGENA:4 | INAUDI:4
+CERRO CHICO VILLAGE;CERRO CHICO VILLAGE;2 - Urca;15;nombre;8;75%;CERRO CHICO VILLAGE:6 | (fuera de los 234):2
+PORTAL DE JACARANDA;Portal de Jacarandá;2 - Urca;24;nombre;8;25%;(fuera de los 234):4 | Portal de Jacarandá:2 | San Jose:1
+QUINTAS DE SAN ANTONIO;QUINTAS DE SAN ANTONIO;6 - Inaudi;11;nombre;7;71%;QUINTAS DE SAN ANTONIO:5 | (fuera de los 234):2
+PARQUE UNIVERSIDAD;PARQUE UNIVERSITARIO;7 - Caseros;22;nombre;7;71%;PARQUE UNIVERSITARIO:5 | (fuera de los 234):2
+AMPLIACION POETA LUGONES II;Ampliación Poeta Lugones (Residencial 2);2 - Urca;15;coordenadas;7;100%;Ampliación Poeta Lugones (Residencial 2):7
+C 2-JARDINES DE BELGRANO;JARDINES DE BELGRANO;2 - Urca;24;nombre;6;0%;(fuera de los 234):6
+LOS PRINCIPIOS;Los Principios;2 - Urca;15;nombre;6;100%;Los Principios:6
+SOLARES DE SANTA MARIA 2;SOLARES DE SANTA MARÍA 2;7 - Caseros;19;nombre;6;83%;SOLARES DE SANTA MARÍA 2:5 | (fuera de los 234):1
+INSTITUCIONES: EDIFICIOS TERRA FORTE 2;;;;SIN RESOLVER;6;0%;(fuera de los 234):4 | PALMAS DE HORIZONTE:2
+ALBORADA NORTE;Alborada Norte;2 - Urca;24;nombre;6;83%;Alborada Norte:5 | (fuera de los 234):1
+PINARES DE CLARET;Pinares de Claret;2 - Urca;14;nombre;6;67%;Pinares de Claret:4 | Apeadero La Tablada:2
+C 1-NATANIA 19;NATANIA 19;1 - Quebrada;2;nombre;5;100%;NATANIA 19:5
+COUNTRY LOS MIMBRES;;;;SIN RESOLVER;5;0%;(fuera de los 234):3 | QUINTAS DE ITALIA:1 | VILLA EUCARISTICA:1
+AMPLIACION POETA LUGONES I;Ampliación Poeta Lugones (Residencial 1);2 - Urca;15;coordenadas;5;80%;Ampliación Poeta Lugones (Residencial 1):4 | (fuera de los 234):1
+BAJADA SAN ROQUE;BAJADA SAN ROQUE;7 - Caseros;10;nombre;4;100%;BAJADA SAN ROQUE:4
+COMISARIA 23A (COMISARIA 23 (VILLA ALLENDE));;;;SIN RESOLVER;4;0%;(fuera de los 234):4
+VILLA LA MATERNIDAD;LA MATERNIDAD;5 - San Vicente;5;nombre;4;0%;SAN VICENTE:4
+HOUSING LA GIGENA;HOUSING GIGENA;6 - Inaudi;11;nombre;4;50%;INAUDI:2 | HOUSING GIGENA:2
+NATANIA 19;NATANIA 19;1 - Quebrada;2;nombre;4;100%;NATANIA 19:4
+BALCONES DEL CHATEAU;BALCONES DEL CHATEAU;1 - Quebrada;2;nombre;4;50%;BALCONES DEL CHATEAU:2 | (fuera de los 234):2
+QUINTAS DE LA RECTA;Quintas de la Recta;2 - Urca;24;nombre;4;50%;Arguello:2 | Quintas de la Recta:2
+AMPLIACION JARDIN HIPODROMO;Ampliación Jardin Hipodromo;6 - Inaudi;11;nombre;4;75%;Ampliación Jardin Hipodromo:3 | (fuera de los 234):1
+COMISARIA 24 (CALERA);;;;SIN RESOLVER;3;0%;(fuera de los 234):3
+COUNTRY CLUB;Country Club;6 - Inaudi;4;nombre;3;33%;(fuera de los 234):2 | Country Club:1
+PARQUE ALAMEDA;Parque Alameda;6 - Inaudi;11;nombre;3;67%;Parque Alameda:2 | (fuera de los 234):1
+C 6-POSTA DE VARGAS ANEXO;POSTA DE VARGAS ANEXO;6 - Inaudi;11;nombre;2;100%;POSTA DE VARGAS ANEXO:2
+VILLA EL GRAN CHAPARRAL;;;;SIN RESOLVER;2;0%;(fuera de los 234):2
+POSTA DE VARGAS ANEXO;POSTA DE VARGAS ANEXO;6 - Inaudi;11;nombre;2;100%;POSTA DE VARGAS ANEXO:2
+CERVECEROS;;;;SIN RESOLVER;2;0%;(fuera de los 234):2
+C 1-BALCONES DEL CHATEAU;BALCONES DEL CHATEAU;1 - Quebrada;2;nombre;1;100%;BALCONES DEL CHATEAU:1
+AMPLIACION VELEZ SASRFIELD - COOP HORIZONTE;AMPLIACION VELEZ SARSFIELD;7 - Caseros;20;nombre;1;0%;(fuera de los 234):1
+ESTANCIA LA LUCIA;VILLA EUCARISTICA;6 - Inaudi;11;coordenadas;1;100%;VILLA EUCARISTICA:1
+CARVECEROS;;;;SIN RESOLVER;1;0%;(fuera de los 234):1
+SARMIENTO;;;;SIN RESOLVER;1;0%;(fuera de los 234):1
