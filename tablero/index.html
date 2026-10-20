@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tablero SAE · Cordobeses en Alerta</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Ubuntu:wght@400;700&display=swap">
+<style>
+  :root { --barra: 46px; --fondo: #0b0d10; --panel: #15191e; --borde: #2a3038; --texto: #e6e9ec; --tenue: #8b949e; --verde: #39ff14; --azul: #1693d5; --oro: #d9b44a; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--fondo); color: var(--texto); font-family: 'Open Sans', Arial, sans-serif; overflow: hidden; }
+
+  /* Barra superior */
+  #barra { position: fixed; inset: 0 0 auto 0; height: var(--barra); display: flex; align-items: center; gap: 10px; padding: 0 14px;
+           background: linear-gradient(180deg, #161b21, #10141a); border-bottom: 1px solid var(--borde); z-index: 50; }
+  #barra .marca { display: flex; align-items: center; gap: 9px; font-weight: 700; font-size: 14px; letter-spacing: .3px; white-space: nowrap; }
+  #barra .marca img { height: 26px; }
+  #barra .sep { width: 1px; height: 24px; background: var(--borde); margin: 0 4px; }
+  .pest { display: flex; background: #0f1317; border: 1px solid var(--borde); border-radius: 8px; padding: 3px; }
+  .pest button { background: none; border: 0; color: var(--tenue); font: 600 13px 'Open Sans', Arial; padding: 5px 14px; border-radius: 6px; cursor: pointer; transition: .2s; }
+  .pest button.on { background: #233041; color: #fff; box-shadow: inset 0 0 0 1px #2f4d6b; }
+  .pest button:hover:not(.on) { color: #fff; }
+  .btn { background: #0f1317; border: 1px solid var(--borde); color: var(--texto); font: 600 13px 'Open Sans', Arial; padding: 6px 11px; border-radius: 8px;
+         cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: .2s; white-space: nowrap; }
+  .btn:hover { border-color: #3d4a57; background: #151b21; }
+  .btn.on { border-color: var(--verde); color: var(--verde); }
+  .btn svg { width: 15px; height: 15px; }
+  #barra .flex { flex: 1; }
+  #info { color: var(--tenue); font-size: 12px; white-space: nowrap; }
+  #progreso { position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background: var(--verde); box-shadow: 0 0 8px var(--verde); }
+
+  /* Escenario */
+  #escena { position: absolute; inset: var(--barra) 0 0 0; overflow: auto; display: flex; justify-content: center; align-items: flex-start; padding: 16px 0 40px; }
+  #escena.ajuste-pagina { align-items: center; padding: 8px 0; overflow: hidden; }
+  .lienzo { position: relative; flex: none; box-shadow: 0 10px 40px rgba(0,0,0,.6); display: none; }
+  .lienzo.on { display: block; animation: aparecer .45s ease; }
+  @keyframes aparecer { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .a4 { width: 930pt; height: 1314.96pt; }
+  .placa { width: 930pt; height: 600pt; }
+  .bg { position: absolute; left: 0; top: 0; width: 100%; height: 100%; user-select: none; pointer-events: none; }
+  .capa { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+  .capa .clic { pointer-events: auto; cursor: pointer; }
+
+  /* Elementos dibujados (mismas medidas que el PDF, en pt) */
+  .t { position: absolute; z-index: 3; white-space: nowrap; line-height: 1.117; font-family: Arial, sans-serif;
+       transition: left .6s cubic-bezier(.2,.8,.2,1), top .6s cubic-bezier(.2,.8,.2,1), opacity .4s; }
+  .r { position: absolute; transition: left .6s cubic-bezier(.2,.8,.2,1), top .6s cubic-bezier(.2,.8,.2,1), width .6s cubic-bezier(.2,.8,.2,1),
+       height .6s cubic-bezier(.2,.8,.2,1), opacity .4s, filter .2s; }
+  .r.clic:hover, .r[data-tip]:hover { filter: brightness(1.35) drop-shadow(0 0 4px rgba(255,255,255,.35)); }
+  .i { position: absolute; }
+  .tipo { overflow: hidden; text-overflow: ellipsis; font-size: 9pt; color: #efefef; }
+  .saliendo { opacity: 0 !important; }
+  .mapa { position: absolute; z-index: 1; background: #212121; }
+  .maplibregl-ctrl-attrib { font-size: 9px !important; background: rgba(0,0,0,.45) !important; }
+  .maplibregl-ctrl-attrib a { color: #888 !important; }
+  .maplibregl-ctrl-group { background: #2a2a2a !important; }
+  .maplibregl-ctrl-group button span { filter: invert(1); }
+  .punto { position: absolute; width: 7pt; height: 7pt; border-radius: 50%; background: #2bd629; }
+  .zona { position: absolute; z-index: 6; cursor: pointer; border-radius: 6px; transition: box-shadow .2s, background .2s; }
+  .zona:hover { box-shadow: 0 0 0 2px rgba(217,180,74,.75), 0 0 18px rgba(217,180,74,.35); background: rgba(217,180,74,.06); }
+  .lista { position: absolute; z-index: 3; font-family: Arial; font-size: 9pt; color: #cccccc; }
+  .fila { position: relative; width: 237pt; line-height: 9pt; padding-bottom: 12.75pt; }
+  .fila .nom { width: 176pt; white-space: normal; }
+  .fila .num { position: absolute; right: 23pt; top: 0; }
+  .fila .bar { position: absolute; left: 216pt; top: .08pt; height: 9pt; background: #39ff14; transform-origin: left; animation: crecer .6s cubic-bezier(.2,.8,.2,1); }
+  @keyframes crecer { from { transform: scaleX(0); } }
+  #anillo circle { transition: stroke-dasharray .7s cubic-bezier(.2,.8,.2,1); }
+  .vacio { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; z-index: 20; pointer-events: none; }
+  .vacio div { background: rgba(10,12,15,.88); border: 1px solid var(--borde); padding: 18pt 28pt; border-radius: 10pt; font: 600 16pt 'Open Sans', Arial; color: #cfd6dd; }
+
+  /* Menús desplegables (selector de período y de DJP) */
+  .menu { position: fixed; z-index: 60; background: #12171c; border: 1px solid #2c343d; border-radius: 10px; box-shadow: 0 18px 50px rgba(0,0,0,.7);
+          padding: 12px; display: none; color: var(--texto); font-size: 13px; }
+  .menu.on { display: block; animation: aparecer .18s ease; }
+  .menu h4 { margin: 2px 2px 8px; font-size: 11px; letter-spacing: .8px; color: var(--tenue); text-transform: uppercase; }
+  .atajos { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 12px; }
+  .atajos button, .djps button { background: #1a2027; border: 1px solid #2a323b; color: var(--texto); border-radius: 7px; padding: 7px 9px; cursor: pointer;
+                                 font: 600 12px 'Open Sans', Arial; text-align: left; transition: .15s; }
+  .atajos button:hover, .djps button:hover { border-color: var(--oro); }
+  .djps button.on, .atajos button.on { border-color: var(--verde); color: var(--verde); }
+  .fechas { display: flex; gap: 8px; align-items: end; }
+  .fechas label { display: flex; flex-direction: column; gap: 4px; font-size: 11px; color: var(--tenue); }
+  .fechas input { background: #0d1115; border: 1px solid #2a323b; color: var(--texto); border-radius: 7px; padding: 6px 8px; font: 13px 'Open Sans', Arial; color-scheme: dark; }
+  .aplicar { background: #1f6f2a; border: 1px solid #2c9a3b; color: #fff; border-radius: 7px; padding: 7px 14px; cursor: pointer; font: 700 12px 'Open Sans', Arial; }
+  .djps { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; width: 330px; }
+  .djps button { text-align: center; padding: 8px 0; }
+  .djps .ancho { grid-column: span 3; }
+  #tip { position: fixed; z-index: 70; pointer-events: none; background: rgba(12,15,19,.95); border: 1px solid #34404c; color: #e9edf1; padding: 6px 9px;
+         border-radius: 7px; font: 12px 'Open Sans', Arial; white-space: nowrap; display: none; box-shadow: 0 8px 22px rgba(0,0,0,.5); }
+  #tip b { color: #fff; }
+  #aviso { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 70; background: #1b2128; border: 1px solid #34404c; color: #dfe6ec;
+           padding: 8px 14px; border-radius: 8px; font-size: 13px; opacity: 0; transition: opacity .3s; pointer-events: none; }
+  #sin-datos { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 100; background: var(--fondo); text-align: center; padding: 30px; }
+  #sin-datos div { max-width: 560px; line-height: 1.6; }
+  #sin-datos code { background: #161b21; padding: 2px 6px; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<div id="barra">
+  <div class="marca"><img src="../plantillas/logo_ojo.png" alt=""><span>Cordobeses en Alerta · SAE</span></div>
+  <div class="sep"></div>
+  <div class="pest" id="pestanas">
+    <button data-vista="general" class="on">General</button>
+    <button data-vista="djp">Por DJP</button>
+    <button data-vista="placa">Placa numérica</button>
+  </div>
+  <button class="btn" id="b-periodo" title="Cambiar el período"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span id="b-periodo-txt"></span></button>
+  <button class="btn" id="b-djp" title="Elegir DJP" style="display:none"><span id="b-djp-txt">DJP 2</span> ▾</button>
+  <div class="flex"></div>
+  <span id="info"></span>
+  <button class="btn" id="b-ajuste" title="Ajustar al ancho o mostrar la página completa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span id="b-ajuste-txt">Página completa</span></button>
+  <button class="btn" id="b-presentar" title="Recorre General, cada DJP y la placa automáticamente"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg><span>Presentación</span></button>
+  <button class="btn" id="b-pantalla" title="Pantalla completa (F)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg></button>
+  <div id="progreso"></div>
+</div>
+
+<div id="escena">
+  <div class="lienzo a4 on" id="pg-general"><img class="bg" src="../plantillas/fondo_general.png" alt=""><div class="capa"></div>
+    <div class="mapa" id="mapa-general" style="left:312pt;top:807.8pt;width:606pt;height:500.9pt"></div>
+    <div class="vacio"><div>Sin sucesos en el período elegido</div></div></div>
+  <div class="lienzo a4" id="pg-djp"><img class="bg" src="../plantillas/fondo_djp.png" alt=""><div class="capa"></div>
+    <div class="mapa" id="mapa-djp" style="left:312pt;top:545.3pt;width:606pt;height:755.7pt"></div>
+    <div class="vacio"><div>Sin sucesos en el período elegido</div></div></div>
+  <div class="lienzo placa" id="pg-placa"><img class="bg" src="../plantillas/fondo_placa.png" alt=""><div class="capa"></div>
+    <div class="vacio"><div>Sin sucesos en el período elegido</div></div></div>
+</div>
+
+<div class="menu" id="m-periodo">
+  <h4>Período</h4>
+  <div class="atajos" id="atajos"></div>
+  <div class="fechas">
+    <label>Desde<input type="date" id="f-desde"></label>
+    <label>Hasta<input type="date" id="f-hasta"></label>
+    <button class="aplicar" id="f-aplicar">Aplicar</button>
+  </div>
+</div>
+<div class="menu" id="m-djp"><h4>DJP</h4><div class="djps" id="lista-djp"></div></div>
+<div id="tip"></div>
+<div id="aviso"></div>
+<div id="sin-datos"><div><h2>Faltan los datos del tablero</h2>
+  <p>Generá el archivo <code>tablero/datos.js</code> desde el CSV del SAE con:</p>
+  <p><code>python scripts/preparar_tablero.py</code></p>
+  <p>o pedíselo a Claude: <i>"actualizá el tablero"</i>.</p></div></div>
+
+<script src="datos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.js"></script>
+<script>
+'use strict';
+if (!window.SAE) { document.getElementById('sin-datos').style.display = 'flex'; throw new Error('Sin datos'); }
+
+// ------------------------------------------------------------------ datos
+const S = window.SAE, C = S.cols, N = S.n;
+const FUERA = 'FUERA DE CUADRANTE';
+const DJPS = S.djps;                                   // índice → nombre
+const EPOCA = Date.UTC(...S.epoca.slice(0, 10).split('-').map((v, i) => i === 1 ? v - 1 : +v));
+const DIA_EPOCA = 3;                                   // 01/01/2020 fue miércoles (0 = domingo)
+const MES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sept', 'oct', 'nov', 'dic'];
+const DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+const SEC = ['fuego', 'blancas', 'estupefacientes', 'vehiculos', 'otros'];
+const AZUL_DJP = '#1590d1', AZUL_HORA = '#1693d5', AZUL_DIA = '#108acb', AZUL_TIPO = '#1492d4', VERDE = '#39ff14';
+const diaDe = s => Math.round((Date.UTC(+s.slice(0, 4), +s.slice(5, 7) - 1, +s.slice(8, 10)) - EPOCA) / 864e5);
+const isoDe = d => new Date(EPOCA + d * 864e5).toISOString().slice(0, 10);
+const fechaDe = d => new Date(EPOCA + d * 864e5);
+const DIA_MIN = diaDe(S.desde), DIA_MAX = diaDe(S.hasta.slice(0, 10));
+const miles = n => n.toLocaleString('es-AR');
+const etiquetaPeriodo = (a, b) => { const x = fechaDe(a), y = fechaDe(b);
+  return `${x.getUTCDate()} ${MES[x.getUTCMonth()]} ${x.getUTCFullYear()} - ${y.getUTCDate()} ${MES[y.getUTCMonth()]} ${y.getUTCFullYear()}`; };
+
+function rango(d1, d2) {      // índices [lo, hi) de los sucesos entre esos días (los datos vienen ordenados por fecha)
+  const busca = m => { let lo = 0, hi = N; while (lo < hi) { const k = (lo + hi) >> 1; if (C.t[k] < m) lo = k + 1; else hi = k; } return lo; };
+  return [busca(d1 * 1440), busca((d2 + 1) * 1440)];
+}
+
+function niceMax(v, n = 4) {  // máximo del eje como Looker (d3.nice)
+  if (v <= 0) return 1;
+  const st = v / n, p = Math.floor(Math.log10(st)), e = st / 10 ** p;
+  const f = e >= Math.sqrt(50) ? 10 : e >= Math.sqrt(10) ? 5 : e >= Math.sqrt(2) ? 2 : 1;
+  const s = f * 10 ** p; return Math.ceil(v / s) * s;
+}
+
+function indicadores(d1, d2, djp, nPos = 15) {
+  const [lo, hi] = rango(d1, d2);
+  const di = djp == null ? -1 : DJPS.indexOf(djp);
+  const r = { alertas: 0, positivos: 0, aprehendidos: 0, mayores: 0, menores: 0, masculinos: 0, femeninas: 0,
+              sec: { fuego: 0, blancas: 0, estupefacientes: 0, vehiculos: 0, otros: 0 },
+              dias: DIAS.map(() => [0, 0]), horas: Array.from({ length: 24 }, () => [0, 0]),
+              porDjp: DJPS.map(() => [0, 0]), puntos: [], alertasPts: [] };
+  const ta = new Int32Array(S.tipos.length), tp = new Int32Array(S.tipos.length), tap = new Int32Array(S.tipos.length);
+  for (let i = lo; i < hi; i++) {
+    const d = C.d[i];
+    if (di >= 0 && d !== di) continue;
+    const p = C.p[i], t = C.t[i], dia = Math.floor(t / 1440), h = Math.floor((t % 1440) / 60), w = (DIA_EPOCA + dia) % 7;
+    r.alertas++; r.positivos += p; r.porDjp[d][0]++; r.porDjp[d][1] += p;
+    r.dias[w][0]++; r.dias[w][1] += p; r.horas[h][0]++; r.horas[h][1] += p;
+    r.aprehendidos += C.ap[i]; r.mayores += C.ma[i]; r.menores += C.me[i]; r.masculinos += C.m[i]; r.femeninas += C.f[i];
+    for (const k of SEC) r.sec[k] += C[k][i];
+    ta[C.y[i]]++; if (p) tp[C.y[i]]++; if (C.ap[i] > 0) tap[C.y[i]]++;
+    if (C.la[i]) { if (p) r.puntos.push(i); else if (r.alertasPts.length < 4000) r.alertasPts.push(i); }
+  }
+  const top = (arr, n) => Array.from(arr, (v, k) => [S.tipos[k], v]).filter(x => x[1] > 0)
+    .sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1)).slice(0, n);
+  r.tipoAlertas = top(ta, 15); r.tipoPositivos = top(tp, nPos); r.tipoAprehendidos = top(tap, 15);
+  return r;
+}
+
+// ------------------------------------------------------------------ motor de dibujo
+// Cada elemento tiene una clave: si ya existe se actualiza (y la transición CSS lo anima); si no, se crea.
+class Lienzo {
+  constructor(id) { this.el = document.getElementById(id); this.capa = this.el.querySelector('.capa'); this.reg = new Map(); }
+  empezar() { this.vistos = new Set(); }
+  terminar() {
+    for (const [k, e] of this.reg) if (!this.vistos.has(k)) {
+      this.reg.delete(k); e.classList.add('saliendo'); setTimeout(() => e.remove(), 420);
+    }
+  }
+  pedir(clave, tag = 'div', cls = '') {
+    this.vistos.add(clave);
+    let e = this.reg.get(clave);
+    if (!e) { e = document.createElement(tag); if (cls) e.className = cls; e._nuevo = true; this.capa.appendChild(e); this.reg.set(clave, e); }
+    else e._nuevo = false;
+    return e;
+  }
+  // Texto: y es la parte superior del glifo, como en el PDF
+  T(clave, x, y, size, texto, o = {}) {
+    const e = this.pedir(clave, 'div', 't' + (o.cls ? ' ' + o.cls : ''));
+    const an = o.anchor || 'start';
+    e.style.cssText = `left:${x}pt;top:${y}pt;font-size:${size}pt;color:${o.color || '#fff'};font-family:${o.font || 'Arial'};` +
+      `font-weight:${o.weight || 'normal'};transform:${an === 'middle' ? 'translateX(-50%)' : an === 'end' ? 'translateX(-100%)' : 'none'} ${o.tf || ''};${o.css || ''}`;
+    if (o.numero != null) contar(e, o.numero, o.fmt || miles); else if (e.textContent !== String(texto)) e.textContent = texto;
+    if (o.ancho) e.style.width = o.ancho + 'pt';
+    return e;
+  }
+  // Rectángulo animado. desde: 'izq' (crece a la derecha) o 'base' (crece hacia arriba desde y+h)
+  R(clave, x, y, w, h, color, o = {}) {
+    const e = this.pedir(clave, 'div', 'r' + (o.clic ? ' clic' : ''));
+    w = Math.max(w, 0); h = Math.max(h, 0);
+    const fin = `left:${x}pt;top:${y}pt;width:${w}pt;height:${h}pt;background:${color};${o.css || ''}`;
+    if (e._nuevo && o.desde) {
+      e.style.cssText = o.desde === 'base' ? `left:${x}pt;top:${y + h}pt;width:${w}pt;height:0;background:${color};${o.css || ''}`
+                                            : `left:${x}pt;top:${y}pt;width:0;height:${h}pt;background:${color};${o.css || ''}`;
+      requestAnimationFrame(() => requestAnimationFrame(() => { e.style.cssText = fin; }));
+    } else e.style.cssText = fin;
+    if (o.tip) e.dataset.tip = o.tip; else delete e.dataset.tip;
+    if (o.clic) e.onclick = o.clic;
+    return e;
+  }
+}
+
+function contar(e, fin, fmt) {          // número que "corre" hasta el valor nuevo
+  const ini = e._valor ?? 0; e._valor = fin;
+  if (ini === fin) { e.textContent = fmt(fin); return; }
+  const t0 = performance.now(), dur = 650;
+  cancelAnimationFrame(e._raf);
+  const paso = now => { const k = Math.min(1, (now - t0) / dur), ease = 1 - Math.pow(1 - k, 3);
+    e.textContent = fmt(Math.round(ini + (fin - ini) * ease)); if (k < 1) e._raf = requestAnimationFrame(paso); };
+  e._raf = requestAnimationFrame(paso);
+}
+
+// ------------------------------------------------------------------ componentes (mismas reglas que el PDF)
+function leyenda(L, k, x, y, yt, size, colTxt, sep, colA, an = 17.2, al = 6.9) {
+  L.R(k + 'a', x, y, an, al, colA); L.T(k + 'at', x + 22.5, yt, size, 'ALERTAS', { color: colTxt });
+  L.R(k + 'p', x + sep, y, an, al, VERDE); L.T(k + 'pt', x + sep + 22.5, yt, size, 'POSITIVOS', { color: colTxt });
+}
+function secuestros(L, sec, tops) { SEC.forEach((k, i) => L.T('sec' + k, 258.5, tops[i], 22.5, '', { anchor: 'middle', numero: sec[k] })); }
+function medidor(L, x0, x1, y0, y1, a, p, borde) {
+  const h = y1 - y0, hp = a ? h * p / a : 0, b = borde ? 'outline:.75pt solid #b7b7b7;' : '';
+  L.R('med-a', x0, y0, x1 - x0, a ? Math.max(h - hp - .7, 0) : 0, '#1899de', { css: b, tip: `<b>Alertas</b>: ${miles(a)}` });
+  L.R('med-p', x0, y1 - hp, x1 - x0, hp, '#28ff00', { css: b, tip: `<b>Positivos</b>: ${miles(p)} (${a ? (p * 100 / a).toFixed(1) : 0}%)` });
+}
+function tipologia(L, k, items, y0, color, n, ancho = 231) {
+  if (!items.length) { L.T(k + 'vacio', 153.75, y0 + 5.4, 7.5, 'No hay datos', { anchor: 'middle' }); return; }
+  const mx = items[0][1], dig = String(mx).length, numDer = 272 + (dig - 2) * 5.9, ini = numDer + 1.85, bmax = 294.8 - ini;
+  items.slice(0, n).forEach(([nom, v], i) => {
+    const y = y0 + i * 21.75;
+    if (i % 2 === 0) L.R(k + 'bg' + i, 6.8, y, 294, 21.75, '#434343');
+    L.T(k + 'n' + i, 12.8, y + 5.4, 9, nom, { cls: 'tipo', ancho, color: '#efefef' });
+    L.T(k + 'v' + i, numDer, y + 5.4, 9, '', { color: '#efefef', anchor: 'end', numero: v });
+    L.R(k + 'b' + i, ini, y + 6, Math.max(.8, bmax * v / mx), 9, color, { desde: 'izq', tip: `${nom}<br><b>${miles(v)}</b>` });
+  });
+}
+function diasH(L, dias, yBar, paso, alto, cajas) {
+  const filas = dias.map((v, i) => [DIAS[i], v[0], v[1]]).filter(f => f[1] > 0);
+  const esc = 220.1 / niceMax(Math.max(1, ...filas.map(f => f[1]))), kk = paso / 22.5;
+  const top0 = yBar - 8.9 * kk, ah = 163.5 * kk;
+  L.R('d-eje', 69.7, top0, .75, ah, '#b8b8b8');
+  if (!filas.length) return;
+  const f = 7 / filas.length, pitch = paso * f, pad = (ah - 7 * paso) / 2;
+  filas.forEach(([dia, a, p]) => {
+    const i = filas.findIndex(x => x[0] === dia), top = top0 + pad + i * pitch;
+    const ya = top + (yBar - top0 - pad) * f, yp = ya + paso * .3 * f, h = alto * f, wa = a * esc, wp = p * esc;
+    L.T('d-l' + dia, 64.7, top + pitch / 2 - 6.7 - .75 * kk, 12, dia, { color: '#f3f3f3', anchor: 'end' });
+    const tip = `<b>${dia}</b><br>Alertas: ${miles(a)}<br>Positivos: ${miles(p)}`;
+    L.R('d-a' + dia, 70.5, ya, wa, h, AZUL_DIA, { desde: 'izq', tip });
+    L.R('d-p' + dia, 70.5, yp, Math.max(wp, p ? 0 : .75), h, VERDE, { desde: 'izq', tip });
+    if (cajas) {
+      [[wa, ya, a, 'a'], [wp, yp, p, 'p']].forEach(([w, y, v, s]) => {
+        const bw = 6.6 * String(v).length + 6; let bx = 70.5 + w + 9; if (bx + bw > 297) bx = 70.5 + w - 9 - bw;
+        const cy = y + h / 2;
+        L.R('d-c' + s + dia, bx, cy - 7.55, bw, 15, '#434343', { css: 'border-radius:2pt' });
+        L.T('d-ct' + s + dia, bx + 3, cy - 7.15, 12, '', { color: '#f3f3f3', numero: v });
+      });
+    } else {
+      L.T('d-ta' + dia, 70.5 + wa + 1.5, ya + h / 2 - 7.1, 12, '', { color: '#f3f3f3', numero: a });
+      L.T('d-tp' + dia, 70.5 + wp + 1.5, yp + h / 2 - 7.1, 12, '', { color: '#f3f3f3', numero: p });
+    }
+  });
+}
+function horasH(L, horas) {
+  const filas = horas.map((v, h) => [h, v[0], v[1]]).filter(f => f[1] > 0);
+  const esc = 272.3 / niceMax(Math.max(1, ...filas.map(f => f[1])));
+  L.R('h-eje', 621.7, 131.2, .75, 395.3, '#f3f3f3');
+  if (!filas.length) return;
+  const pitch = 395.3 / filas.length, f = pitch / 16.45;
+  filas.forEach(([h, a, p], i) => {
+    const top = 131.2 + i * pitch, ya = top + 1.7 * f, yp = top + 9.1 * f, hb = 6.8 * f, wa = a * esc, wp = p * esc;
+    const tip = `<b>${h} hs</b><br>Alertas: ${miles(a)}<br>Positivos: ${miles(p)}`;
+    L.T('h-l' + h, 613.1, top + pitch / 2 - 5.3, 9, h, { color: '#efefef', anchor: 'end' });
+    L.R('h-a' + h, 622.5, ya, wa, hb, AZUL_HORA, { desde: 'izq', tip });
+    L.R('h-p' + h, p ? 622.5 : 621.8, yp, p ? wp : .75, hb, VERDE, { desde: 'izq', tip });
+    L.T('h-ta' + h, 622.5 + wa + 1.5, ya + hb / 2 - 5.8, 9.75, '', { numero: a });
+    L.T('h-tp' + h, 622.5 + wp + 1.5, yp + hb / 2 - 5.8, 9.75, '', { numero: p });
+  });
+}
+function horasV(L, horas) {
+  const base = 777.8, esc = 181.5 / niceMax(Math.max(1, ...horas.map(v => v[0])));
+  L.R('v-eje', 330, 777.75, 579, .75, '#f3f3f3');
+  horas.forEach(([a, p], h) => {
+    const xa = 332.4 + h * 24.1, xp = xa + 10.9, ha = a * esc, hp = Math.max(p * esc, .75);
+    const tip = `<b>${h} hs</b><br>Alertas: ${miles(a)}<br>Positivos: ${miles(p)}`;
+    L.R('v-a' + h, xa, base - ha, 9, ha, AZUL_HORA, { desde: 'base', tip });
+    L.R('v-p' + h, xp, base - hp, 9, hp, VERDE, { desde: 'base', tip });
+    L.T('v-ta' + h, xa + 4.5, base - ha - 12.5, 9.75, '', { anchor: 'middle', numero: a });
+    L.T('v-tp' + h, xp + 4.5, base - hp - 12.5, 9.75, '', { anchor: 'middle', numero: p });
+    L.T('v-l' + h, xa + 9.95, 782, 9, h, { color: '#efefef', anchor: 'middle' });
+  });
+}
+const CATS = DJPS.filter(d => d !== FUERA).sort().concat([FUERA]);   // orden alfabético de texto, como Looker
+function graficoDjp(L, porDjp) {
+  const base = 522, val = c => porDjp[DJPS.indexOf(c)];
+  const mx = Math.max(1, ...CATS.map(c => val(c)[0])), k = 179.1 / Math.log10(mx + 1);
+  L.R('g-grid', 22.5, 511.5, 876, .75, '#666666');
+  CATS.forEach((c, i) => {
+    const [a, p] = val(c), xa = 35 + i * 39.29, xp = xa + 13.4, ha = k * Math.log10(a + 1), hp = k * Math.log10(p + 1);
+    const nombre = c === FUERA ? 'Fuera de Cuadrante' : 'DJP ' + c;
+    const tip = `<b>${nombre}</b><br>Alertas: ${miles(a)}<br>Positivos: ${miles(p)}<br><span style="color:#8b949e">Clic para ver la página</span>`;
+    const ir = () => irADjp(c);
+    L.R('g-a' + c, xa, base - ha, 12.75, ha, AZUL_DJP, { desde: 'base', tip, clic: ir });
+    L.R('g-p' + c, xp, base - hp, 12.75, hp, VERDE, { desde: 'base', tip, clic: ir });
+    [[xa, ha, a, false, 'a'], [xp, hp, p, true, 'p']].forEach(([x, h, v, adentro, s]) => {
+      const bw = 5.85 * String(v).length + 6, cx = x + 6.375;
+      const top = adentro && v < 10 && h >= 14.5 ? base - h + .7 : (!adentro && base - h - 23.2 < 340) ? base - h + 8.2 : base - h - 23.2;
+      L.R('g-c' + s + c, cx - bw / 2, top, bw, 13.5, '#ffffff', { css: 'border-radius:1.5pt' });
+      L.T('g-t' + s + c, cx, top + .3, 10.5, '', { color: '#000', anchor: 'middle', numero: v });
+    });
+  });
+}
+function rotuloDjp(L) {   // etiquetas inclinadas del eje (fijas)
+  if (L.el.querySelector('#rot')) return;
+  const ns = 'http://www.opengis.net/kml/2.2';
+  let s = '<svg id="rot" class="i" style="left:0;top:0;width:930pt;height:1314.96pt;z-index:3;pointer-events:none" viewBox="0 0 930 1314.96"><g font-family="Arial" font-size="9.75" fill="#d9d9d9">';
+  CATS.forEach((c, i) => { const ax = 35 + i * 39.29 + 13.05 + 3.32, ay = 524.74;
+    s += `<text x="${ax}" y="${ay}" text-anchor="end" transform="rotate(-30 ${ax} ${ay})">${c === FUERA ? 'FUER…' : c}</text>`; });
+  L.capa.insertAdjacentHTML('beforeend', s + '</g></svg>');
+}
+function marcas(L, lista) { lista.forEach(([x, y, c], i) => L.T('marca' + i, x, y, 72, 'D.M.C.A.', { color: c, font: 'Impact', css: 'opacity:.11' })); }
+function img(L, k, src, x0, y0, x1, y1) {
+  const e = L.pedir(k, 'img', 'i'); if (!e.src) e.src = src;
+  e.style.cssText = `left:${x0}pt;top:${y0}pt;width:${x1 - x0}pt;height:${y1 - y0}pt;z-index:4`;
+}
+
+// ------------------------------------------------------------------ mapas
+const F = ['Noto Sans Regular'], FB = ['Noto Sans Bold'];
+const nombreMapa = ['coalesce', ['get', 'name:es'], ['get', 'name']];
+const anchoL = (a, b) => ['interpolate', ['exponential', 1.6], ['zoom'], 11, a, 17, b];
+const linea = (id, cl, col, a, b) => ({ id, type: 'line', source: 'omt', 'source-layer': 'transportation', filter: ['in', ['get', 'class'], ['literal', cl]],
+  layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': col, 'line-width': anchoL(a, b) } });
+const halo = { 'text-halo-color': '#212121', 'text-halo-width': 1.6 };
+const ESTILO = { version: 8, glyphs: 'https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf',
+  sources: { omt: { type: 'vector', url: 'https://tiles.openfreemap.org/planet', attribution: '© OpenStreetMap · OpenFreeMap' } },
+  layers: [
+    { id: 'fondo', type: 'background', paint: { 'background-color': '#212121' } },
+    { id: 'verde', type: 'fill', source: 'omt', 'source-layer': 'landuse', filter: ['in', ['get', 'class'], ['literal', ['park', 'cemetery', 'stadium', 'pitch']]], paint: { 'fill-color': '#181818' } },
+    { id: 'verde2', type: 'fill', source: 'omt', 'source-layer': 'park', paint: { 'fill-color': '#181818' } },
+    { id: 'agua', type: 'fill', source: 'omt', 'source-layer': 'water', paint: { 'fill-color': '#000000' } },
+    { id: 'rio', type: 'line', source: 'omt', 'source-layer': 'waterway', paint: { 'line-color': '#000000', 'line-width': anchoL(1, 6) } },
+    linea('tren', ['rail', 'transit'], '#2f2f2f', .6, 2), linea('calle', ['minor', 'service'], '#2c2c2c', .4, 9),
+    linea('avenida', ['secondary', 'tertiary'], '#373737', .9, 13), linea('troncal', ['primary', 'trunk'], '#3c3c3c', 1.2, 15),
+    linea('autopista', ['motorway'], '#4e4e4e', 1.5, 16),
+    { id: 'nc', type: 'symbol', source: 'omt', 'source-layer': 'transportation_name', minzoom: 13, filter: ['in', ['get', 'class'], ['literal', ['minor', 'tertiary', 'secondary']]],
+      layout: { 'symbol-placement': 'line', 'text-field': nombreMapa, 'text-font': F, 'text-size': 10 }, paint: Object.assign({ 'text-color': '#6b6b6b' }, halo) },
+    { id: 'na', type: 'symbol', source: 'omt', 'source-layer': 'transportation_name', minzoom: 12, filter: ['in', ['get', 'class'], ['literal', ['primary', 'trunk', 'motorway']]],
+      layout: { 'symbol-placement': 'line', 'text-field': nombreMapa, 'text-font': F, 'text-size': 11 }, paint: Object.assign({ 'text-color': '#8a8a8a' }, halo) },
+    { id: 'barrio', type: 'symbol', source: 'omt', 'source-layer': 'place', filter: ['in', ['get', 'class'], ['literal', ['suburb', 'neighbourhood', 'quarter']]],
+      layout: { 'text-field': nombreMapa, 'text-font': F, 'text-transform': 'uppercase', 'text-letter-spacing': .08, 'text-max-width': 7,
+                'text-size': ['interpolate', ['linear'], ['zoom'], 11, 8.5, 15, 11.5] }, paint: Object.assign({ 'text-color': '#8c8c8c' }, halo) },
+    { id: 'localidad', type: 'symbol', source: 'omt', 'source-layer': 'place', filter: ['in', ['get', 'class'], ['literal', ['town', 'village', 'hamlet']]],
+      layout: { 'text-field': nombreMapa, 'text-font': F, 'text-size': 13, 'text-max-width': 8 }, paint: Object.assign({ 'text-color': '#bdbdbd' }, halo) },
+    { id: 'ciudad', type: 'symbol', source: 'omt', 'source-layer': 'place', filter: ['==', ['get', 'class'], 'city'],
+      layout: { 'text-field': nombreMapa, 'text-font': FB, 'text-size': 19 }, paint: Object.assign({ 'text-color': '#d6d6d6' }, halo) },
+  ] };
+const VISTA_GENERAL = { center: [-64.1866, -31.415], zoom: 11 };
+const mapas = {};
+function crearMapa(id) {
+  if (!window.maplibregl) return null;
+  const m = new maplibregl.Map({ container: id, style: ESTILO, attributionControl: { compact: true }, ...VISTA_GENERAL, dragRotate: false, pitchWithRotate: false });
+  m.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
+  m.on('load', () => {
+    m.addSource('pos', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+    m.addLayer({ id: 'pos-halo', type: 'circle', source: 'pos', paint: { 'circle-radius': 9, 'circle-color': '#2bd629', 'circle-opacity': .16, 'circle-blur': .6 } });
+    m.addLayer({ id: 'pos', type: 'circle', source: 'pos', paint: { 'circle-radius': 4.6, 'circle-color': '#2bd629' } });
+    m.on('mousemove', 'pos', e => { m.getCanvas().style.cursor = 'pointer'; const f = e.features[0].properties;
+      mostrarTip(`<b>${f.tipo}</b><br>${f.fecha}`, e.originalEvent); });
+    m.on('mouseleave', 'pos', () => { m.getCanvas().style.cursor = ''; ocultarTip(); });
+    m._listo = true; if (m._pendiente) { m._pendiente(); m._pendiente = null; }
+  });
+  return m;
+}
+function actualizarMapa(m, puntos, alternativos, general) {
+  if (!m) return;
+  const hacer = () => {
+    const pad = n => String(n).padStart(2, '0');
+    m.getSource('pos').setData({ type: 'FeatureCollection', features: puntos.map(i => {
+      const t = C.t[i], d = fechaDe(Math.floor(t / 1440));
+      return { type: 'Feature', geometry: { type: 'Point', coordinates: [C.lo[i] / 1e5, C.la[i] / 1e5] },
+               properties: { tipo: S.tipos[C.y[i]], fecha: `${pad(d.getUTCDate())}/${pad(d.getUTCMonth() + 1)}/${d.getUTCFullYear()} ${pad(Math.floor((t % 1440) / 60))}:${pad(t % 60)}` } };
+    }) });
+    const enc = puntos.length ? puntos : alternativos;
+    if (general || !enc.length) m.easeTo({ ...VISTA_GENERAL, duration: 900 });
+    else {
+      const b = new maplibregl.LngLatBounds(); enc.forEach(i => b.extend([C.lo[i] / 1e5, C.la[i] / 1e5]));
+      m.fitBounds(b, { padding: 60, maxZoom: 14.5, duration: 1100 });
+    }
+  };
+  m._listo ? hacer() : (m._pendiente = hacer);
+}
+
+// ------------------------------------------------------------------ páginas
+const LG = new Lienzo('pg-general'), LD = new Lienzo('pg-djp'), LP = new Lienzo('pg-placa');
+const est = { vista: 'general', djp: '2', d1: 0, d2: 0 };
+
+function paginaGeneral() {
+  const L = LG, r = indicadores(est.d1, est.d2, null, 20);
+  L.empezar();
+  L.T('per', 754.65, 50, 13.5, etiquetaPeriodo(est.d1, est.d2), { anchor: 'middle' });
+  L.T('flecha', 871.5, 51, 13.5, '▾', { tf: 'scaleX(1.4)' });
+  secuestros(L, r.sec, [128.1, 169.4, 207.6, 245.1, 282.6]);
+  medidor(L, 354, 426.8, 105, 285.8, r.alertas, r.positivos, false);
+  L.T('kpi-a', 555, 156.4, 36, '', { color: '#efefef', anchor: 'middle', numero: r.alertas });
+  L.T('kpi-p', 555, 246.4, 36, '', { color: '#efefef', anchor: 'middle', numero: r.positivos });
+  L.T('kpi-ap', 795, 238.2, 36, '', { anchor: 'middle', numero: r.aprehendidos });
+  L.R('lg-a', 25.6, 321.8, 18.6, 7.4, AZUL_DJP); L.T('lg-at', 49.8, 319, 10.5, 'ALERTA POR DJP');
+  L.R('lg-p', 147.8, 321.8, 18.6, 7.4, VERDE); L.T('lg-pt', 172.1, 319, 10.5, 'POSITIVO POR DJP');
+  graficoDjp(L, r.porDjp); rotuloDjp(L);
+  L.T('fdc1', 852.8, 516, 8.25, 'Fuera de', { color: '#d9d9d9' }); L.T('fdc2', 852.8, 522.8, 8.25, 'Cuadrante', { color: '#d9d9d9' });
+  leyenda(L, 'ld', 72.2, 578.9, 576.6, 8.25, '#d9d9d9', 64.5, AZUL_DIA, 14.6, 5.8);
+  diasH(L, r.dias, 606, 26.6, 5.2, false);
+  leyenda(L, 'lh', 332.9, 578.4, 576, 9.75, '#f3f3f3', 75, AZUL_HORA);
+  horasV(L, r.horas);
+  tipologia(L, 'tp', r.tipoPositivos, 854.2, VERDE, 20);
+  L.T('m-tit', 505.2, 815.4, 17.25, 'CONCENTRACIÓN DE POSITIVOS', { color: '#cccccc', css: 'z-index:5;text-shadow:0 1px 4px #000' });
+  L.T('m-res', 325.5, 1282.6, 9, 'Resultado', { color: '#b7b7b7', weight: 'bold', css: 'z-index:5' });
+  const pt = L.pedir('m-pto', 'div', 'punto'); pt.style.cssText = 'left:378.5pt;top:1284.4pt;z-index:5';
+  L.T('m-pos', 391.5, 1282.6, 9, 'Positivo', { color: '#b7b7b7', css: 'z-index:5' });
+  img(L, 'logo1', '../plantillas/logo_ojo.png', 824, 1267, 867, 1298); img(L, 'logo2', '../plantillas/logo_policia.png', 854, 1263, 923, 1298);
+  marcas(L, [[82.9, 620.4, '#cccccc'], [345.4, 350.4, '#cccccc'], [510.4, 1167.9, '#d9d9d9'], [52.9, 1145.4, '#cccccc'], [525.4, 852.9, '#cccccc'], [532.9, 650.4, '#cccccc']]);
+  L.T('pie', 913.7, 1303.6, 9, '*** FUENTE DE INFORMACIÓN: SAE', { anchor: 'end' });
+  L.terminar();
+  L.el.querySelector('.vacio').style.display = r.alertas ? 'none' : 'flex';
+  actualizarMapa(mapas.general, r.puntos, [], true);
+}
+
+function paginaDjp() {
+  const L = LD, djp = est.djp, fuera = djp === FUERA, r = indicadores(est.d1, est.d2, djp, 15);
+  L.el.querySelector('.bg').src = fuera ? '../plantillas/fondo_fuera.png' : '../plantillas/fondo_djp.png';
+  L.empezar();
+  L.T('per', 738.15, 52.3, 13.5, etiquetaPeriodo(est.d1, est.d2), { anchor: 'middle' });
+  L.T('flecha', 836.5, 53.2, 13.5, '▾', { tf: 'scaleX(1.4)' });
+  if (fuera) {
+    L.T('sub', 423.8, 52, 15, 'FUERA DE CUADRANTE', { color: '#f3f3f3', anchor: 'middle', font: "'Ubuntu'", weight: 700 });
+    L.T('dj1', 882.75, 46.7, 10.5, 'FUERA DE', { color: '#efefef', anchor: 'middle', weight: 'bold' });
+    L.T('dj2', 882.75, 58.7, 10.5, 'CUADRANTE', { color: '#efefef', anchor: 'middle', weight: 'bold' });
+  } else L.T('dj', 877.5, 42.6, 22.5, djp, { color: '#efefef', anchor: 'middle' });
+  secuestros(L, r.sec, [132.6, 170.1, 207.6, 245.1, 282.6]);
+  medidor(L, 334.9, 385.9, 112.5, 293.2, r.alertas, r.positivos, true);
+  L.T('kpi-a', 487.5, 156.4, 36, '', { color: '#efefef', anchor: 'middle', numero: r.alertas });
+  L.T('kpi-p', 487.5, 246.4, 36, '', { color: '#efefef', anchor: 'middle', numero: r.positivos });
+  L.T('kpi-ap', 442.5, 463.2, 36, '', { anchor: 'middle', numero: r.aprehendidos });
+  leyenda(L, 'ld', 72.2, 353.9, 351.6, 8.25, '#d9d9d9', 64.5, AZUL_DIA, 14.6, 5.8);
+  diasH(L, r.dias, 379.4, 22.5, 4.5, true);
+  leyenda(L, 'lh', 624.6, 113.4, 111, 9.75, '#f3f3f3', 75, AZUL_HORA);
+  horasH(L, r.horas);
+  L.T('st-a', 153.75, 579, 15.75, 'ALERTAS', { color: '#2398d5', anchor: 'middle' });
+  tipologia(L, 'ta', r.tipoAlertas, 599.2, AZUL_TIPO, 15);
+  L.T('st-p', 153.75, 946.5, 15.75, 'POSITIVOS', { color: VERDE, anchor: 'middle' });
+  tipologia(L, 'tp', r.tipoPositivos, 966.8, VERDE, 15);
+  L.T('m-tit', 370.2, 560.4, 17.25, 'CONCENTRACIÓN DE POSITIVOS', { color: '#cccccc', css: 'z-index:5;text-shadow:0 1px 4px #000' });
+  L.T('m-res', 325.5, 1275.1, 9, 'Resultado', { color: '#d9d9d9', weight: 'bold', css: 'z-index:5' });
+  const pt = L.pedir('m-pto', 'div', 'punto'); pt.style.cssText = 'left:378.5pt;top:1276.9pt;z-index:5';
+  L.T('m-pos', 391.5, 1275.1, 9, 'Positivo', { color: '#d9d9d9', css: 'z-index:5' });
+  img(L, 'logo1', '../plantillas/logo_ojo.png', 809, 1264, 856, 1299); img(L, 'logo2', '../plantillas/logo_policia.png', 839, 1260, 916, 1298);
+  marcas(L, [[45.4, 732.9, '#cccccc'], [697.9, 267.9, '#999999'], [502.9, 597.9, '#cccccc'], [90.4, 395.4, '#cccccc'], [510.4, 1167.9, '#d9d9d9'], [37.9, 1092.9, '#cccccc']]);
+  L.T('pie', 910.2, 1303.6, 9, '* FUENTE DE INFORMACIÓN: SAE', { anchor: 'end' });
+  L.terminar();
+  L.el.querySelector('.vacio').style.display = r.alertas ? 'none' : 'flex';
+  actualizarMapa(mapas.djp, r.puntos, r.alertasPts, false);
+}
+
+function paginaPlaca() {
+  const L = LP, r = indicadores(est.d1, est.d2, null, 15);
+  L.empezar();
+  L.T('per-t', 25.5, 35.2, 15, 'Periodo:', { weight: 'bold' });
+  L.T('per', 96.8, 35, 13.5, etiquetaPeriodo(est.d1, est.d2));
+  L.T('flecha', 284.5, 36.8, 13.5, '▾', { tf: 'scaleX(1.4)' });
+  L.T('res', 455, 28.9, 16.5, 'Resumen Numérico', { color: '#f3f3f3', anchor: 'middle', font: "'Ubuntu'" });
+  img(L, 'l1', '../plantillas/placa_ojo.png', 794, 12, 855, 58); img(L, 'l2', '../plantillas/placa_policia.png', 832, 5, 954, 67);
+  L.T('kpi-a', 232.5, 108.3, 27, '', { anchor: 'middle', numero: r.alertas });
+  L.T('kpi-p', 693.75, 108.3, 27, '', { anchor: 'middle', numero: r.positivos });
+  // Anillo masculino / femenino (suma de columnas del CSV, decisión acordada)
+  const m = r.masculinos, f = r.femeninas, tot = (m + f) || 1, cx = 209.25, cy = 367.55, ro = 120.75, ri = 61.5;
+  const rr = (ro + ri) / 2, sw = ro - ri, circ = 2 * Math.PI * rr, frac = f / tot;
+  let svg = L.capa.querySelector('#anillo');
+  if (!svg) {
+    L.capa.insertAdjacentHTML('beforeend', `<svg id="anillo" class="i" style="left:0;top:0;width:930pt;height:600pt;z-index:2" viewBox="0 0 930 600">
+      <circle cx="${cx}" cy="${cy}" r="${rr}" fill="none" stroke="#2500c9" stroke-width="${sw}"/>
+      <circle id="arco" cx="${cx}" cy="${cy}" r="${rr}" fill="none" stroke="#ff5bd6" stroke-width="${sw}" stroke-dasharray="0 ${circ}"
+              transform="matrix(-1 0 0 1 ${2 * cx} 0) rotate(-90 ${cx} ${cy})"/>
+      <circle cx="${cx}" cy="${cy}" r="${ri}" fill="#434343" stroke="#000" stroke-width="1.5"/></svg>`);
+    svg = L.capa.querySelector('#anillo');
+  }
+  requestAnimationFrame(() => svg.querySelector('#arco').setAttribute('stroke-dasharray', `${circ * frac} ${circ}`));
+  const a = 2 * Math.PI * frac;
+  if (f) L.T('pf', cx - .62 * ro * Math.sin(a / 2), cy - .62 * ro * Math.cos(a / 2) - 5.5, 9.75, `${(frac * 100).toFixed(1)}%`, { color: '#000', anchor: 'middle' });
+  const am = a + (2 * Math.PI - a) / 2;
+  L.T('pm', cx - .75 * ro * Math.sin(am), cy - .75 * ro * Math.cos(am) - 5.5, 9.75, `${((1 - frac) * 100).toFixed(1)}%`, { color: '#9f9f9f', anchor: 'middle' });
+  L.R('lm', 111.8, 219.8, 16.5, 16.5, '#1652f6', { css: 'outline:1.5pt solid #000' }); L.T('lmt', 132.8, 223, 10.5, 'MASCULINO', { color: '#efefef' });
+  L.R('lf', 216.8, 219.8, 16.5, 16.5, '#ff3ef5', { css: 'outline:1.5pt solid #000' }); L.T('lft', 237.8, 223, 10.5, 'FEMENINO', { color: '#efefef' });
+  L.T('tot', 207.75, 342.5, 13.5, 'TOTAL', { anchor: 'middle' });
+  L.T('tot-v', 207.75, 358.8, 27, '', { anchor: 'middle', numero: r.aprehendidos });
+  L.T('may', 105, 523.1, 27, '', { color: '#d9d9d9', anchor: 'middle', numero: r.mayores });
+  L.T('men', 303.75, 523.8, 27, '', { color: '#d9d9d9', anchor: 'middle', numero: r.menores });
+  L.T('pos-t', 392.2, 177.2, 10.5, 'POSITIVOS', { color: '#b7b7b7' });
+  const lista = L.pedir('lista', 'div', 'lista'); lista.style.cssText = 'left:396pt;top:200.92pt';
+  const it = r.tipoAprehendidos, mx = it.length ? it[0][1] : 1, bmax = String(mx).length <= 2 ? 21 : 15;
+  lista.innerHTML = it.map(([n, v]) => `<div class="fila"><div class="nom">${n}</div><div class="num">${v}</div>
+     <div class="bar" style="width:${Math.max(.8, bmax * v / mx)}pt"></div></div>`).join('');
+  ['fuego', 'blancas', 'vehiculos', 'estupefacientes', 'otros'].forEach((k, i) =>
+    L.T('s' + k, 776.25, [243.3, 315.3, 383.6, 457.8, 525.3][i], 27, '', { color: '#d9d9d9', anchor: 'middle', numero: r.sec[k] }));
+  L.R('pie-b', -.8, 584.2, 931.5, 16.6, '#241b1b');
+  L.T('pie', 902.4, 586.7, 10.5, '* FUENTE DE INFORMACION: SAE', { anchor: 'end' });
+  L.terminar();
+  L.el.querySelector('.vacio').style.display = r.alertas ? 'none' : 'flex';
+}
+
+// Zonas clicables sobre los recuadros de "Periodo" y "DJP" (como en Looker)
+function zonas() {
+  const z = (L, x, y, w, h, fn, tit) => { const e = document.createElement('div'); e.className = 'zona'; e.title = tit;
+    e.style.cssText = `left:${x}pt;top:${y}pt;width:${w}pt;height:${h}pt`; e.onclick = ev => { ev.stopPropagation(); fn(e); }; L.el.appendChild(e); };
+  z(LG, 641, 44, 263, 28, abrirPeriodo, 'Cambiar el período');
+  z(LD, 641, 44, 183, 28, abrirPeriodo, 'Cambiar el período');
+  z(LD, 834, 10, 88, 70, abrirDjp, 'Elegir DJP');
+  z(LP, 20, 30, 285, 25, abrirPeriodo, 'Cambiar el período');
+}
+
+// ------------------------------------------------------------------ interacción
+function dibujar() {
+  ({ general: paginaGeneral, djp: paginaDjp, placa: paginaPlaca })[est.vista]();
+  document.getElementById('b-periodo-txt').textContent = etiquetaPeriodo(est.d1, est.d2);
+  document.getElementById('b-djp').style.display = est.vista === 'djp' ? '' : 'none';
+  document.getElementById('b-djp-txt').textContent = est.djp === FUERA ? 'Fuera de Cuadrante' : 'DJP ' + est.djp;
+  try { localStorage.setItem('tablero-sae', JSON.stringify({ vista: est.vista, djp: est.djp, d1: isoDe(est.d1), d2: isoDe(est.d2) })); } catch (e) {}
+}
+function mostrarVista(v) {
+  est.vista = v;
+  document.querySelectorAll('#pestanas button').forEach(b => b.classList.toggle('on', b.dataset.vista === v));
+  document.querySelectorAll('.lienzo').forEach(l => l.classList.toggle('on', l.id === 'pg-' + v));
+  ajustar(); dibujar();
+  setTimeout(() => Object.values(mapas).forEach(m => m && m.resize()), 30);
+}
+function irADjp(d) { est.djp = d; mostrarVista('djp'); }
+function cambiarPeriodo(d1, d2) {
+  if (d1 > d2) [d1, d2] = [d2, d1];
+  est.d1 = d1; est.d2 = d2; dibujar(); cerrarMenus();
+  if (d2 > DIA_MAX) avisar(`Los datos llegan hasta el ${S.hasta.slice(8, 10)}/${S.hasta.slice(5, 7)}/${S.hasta.slice(0, 4)}: el período está incompleto.`);
+}
+function avisar(t) { const a = document.getElementById('aviso'); a.textContent = t; a.style.opacity = 1; clearTimeout(a._t); a._t = setTimeout(() => a.style.opacity = 0, 4200); }
+
+// Atajos de período, relativos a la fecha hasta donde llegan los datos
+function atajos() {
+  const fin = DIA_MAX, f = fechaDe(fin), y = f.getUTCFullYear(), mo = f.getUTCMonth();
+  const dia = (yy, mm, dd) => Math.round((Date.UTC(yy, mm, dd) - EPOCA) / 864e5);
+  const finMes = dia(y, mo + 1, 0) === fin;   // ¿los datos cubren el mes completo?
+  const ultimoMes = finMes ? [dia(y, mo, 1), fin] : [dia(y, mo - 1, 1), dia(y, mo, 0)];
+  const w = (DIA_EPOCA + fin) % 7, jueves = fin - ((w - 4 + 7) % 7);   // último jueves con datos
+  return [
+    ['Último mes completo', ultimoMes], ['Mes en curso', [dia(y, mo, 1), fin]],
+    ['Última semana (vie–jue)', [jueves - 6, jueves]], ['Semana anterior (vie–jue)', [jueves - 13, jueves - 7]],
+    ['Últimos 7 días', [fin - 6, fin]], ['Últimos 30 días', [fin - 29, fin]],
+    ['Este año', [Math.max(DIA_MIN, dia(y, 0, 1)), fin]], ['Todo el período', [DIA_MIN, fin]],
+  ];
+}
+function posicionar(menu, ancla) {
+  const r = ancla.getBoundingClientRect(); menu.classList.add('on');
+  const w = menu.offsetWidth; let x = Math.min(r.left, innerWidth - w - 10); x = Math.max(10, x);
+  menu.style.left = x + 'px'; menu.style.top = Math.min(r.bottom + 6, innerHeight - menu.offsetHeight - 10) + 'px';
+}
+function abrirPeriodo(ancla) {
+  cerrarMenus();
+  const m = document.getElementById('m-periodo'), cont = document.getElementById('atajos');
+  cont.innerHTML = '';
+  atajos().forEach(([nom, [a, b]]) => { const bt = document.createElement('button'); bt.textContent = nom;
+    if (a === est.d1 && b === est.d2) bt.className = 'on'; bt.onclick = () => cambiarPeriodo(a, b); cont.appendChild(bt); });
+  const fd = document.getElementById('f-desde'), fh = document.getElementById('f-hasta');
+  fd.value = isoDe(est.d1); fh.value = isoDe(est.d2); fd.min = fh.min = isoDe(DIA_MIN); fd.max = fh.max = isoDe(DIA_MAX);
+  posicionar(m, ancla);
+}
+function abrirDjp(ancla) {
+  cerrarMenus();
+  const m = document.getElementById('m-djp'), cont = document.getElementById('lista-djp');
+  cont.innerHTML = '';
+  DJPS.forEach(d => { const bt = document.createElement('button'); bt.textContent = d === FUERA ? 'Fuera de Cuadrante' : d;
+    if (d === FUERA) bt.className = 'ancho'; if (d === est.djp) bt.classList.add('on');
+    bt.onclick = () => { cerrarMenus(); irADjp(d); }; cont.appendChild(bt); });
+  posicionar(m, ancla);
+}
+function cerrarMenus() { document.querySelectorAll('.menu').forEach(m => m.classList.remove('on')); }
+document.getElementById('f-aplicar').onclick = () => {
+  const a = document.getElementById('f-desde').value, b = document.getElementById('f-hasta').value;
+  if (a && b) cambiarPeriodo(diaDe(a), diaDe(b));
+};
+document.getElementById('b-periodo').onclick = e => { e.stopPropagation(); abrirPeriodo(e.currentTarget); };
+document.getElementById('b-djp').onclick = e => { e.stopPropagation(); abrirDjp(e.currentTarget); };
+document.querySelectorAll('.menu').forEach(m => m.addEventListener('click', e => e.stopPropagation()));
+document.addEventListener('click', cerrarMenus);
+document.querySelectorAll('#pestanas button').forEach(b => b.onclick = () => { pararPresentacion(); mostrarVista(b.dataset.vista); });
+
+// Tooltip
+const tip = document.getElementById('tip');
+function mostrarTip(html, ev) { tip.innerHTML = html; tip.style.display = 'block';
+  const x = Math.min(ev.clientX + 14, innerWidth - tip.offsetWidth - 8), y = Math.min(ev.clientY + 14, innerHeight - tip.offsetHeight - 8);
+  tip.style.left = x + 'px'; tip.style.top = y + 'px'; }
+function ocultarTip() { tip.style.display = 'none'; }
+document.getElementById('escena').addEventListener('mousemove', e => {
+  const t = e.target.closest && e.target.closest('[data-tip]'); if (t) mostrarTip(t.dataset.tip, e); else if (!e.target.closest('.mapa')) ocultarTip();
+});
+
+// Escala: ajustar al ancho de la ventana o mostrar la página completa
+let modoAjuste = 'ancho';
+function ajustar() {
+  const esc = document.getElementById('escena'), l = document.querySelector('.lienzo.on');
+  l.style.zoom = 1; const w = l.offsetWidth, h = l.offsetHeight;
+  const zw = (esc.clientWidth - 32) / w, zh = (esc.clientHeight - 16) / h;
+  l.style.zoom = modoAjuste === 'ancho' ? Math.min(zw, 1.6) : Math.min(zw, zh);
+  esc.classList.toggle('ajuste-pagina', modoAjuste === 'pagina');
+  document.getElementById('b-ajuste-txt').textContent = modoAjuste === 'ancho' ? 'Página completa' : 'Ajustar al ancho';
+  Object.values(mapas).forEach(m => m && m.resize());
+}
+document.getElementById('b-ajuste').onclick = () => { modoAjuste = modoAjuste === 'ancho' ? 'pagina' : 'ancho'; ajustar(); };
+addEventListener('resize', ajustar);
+document.getElementById('b-pantalla').onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+document.addEventListener('fullscreenchange', () => setTimeout(ajustar, 80));
+
+// Modo presentación: General → cada DJP → Fuera de Cuadrante → Placa
+let pres = null;
+const SEG = 14;
+function pasos() { return [['general']].concat(DJPS.map(d => ['djp', d]), [['placa']]); }
+function iniciarPresentacion() {
+  const b = document.getElementById('b-presentar'); b.classList.add('on'); b.querySelector('span').textContent = 'Detener';
+  modoAjuste = 'pagina';
+  let i = 0; const lista = pasos();
+  const ir = () => { const [v, d] = lista[i % lista.length]; if (d) est.djp = d; mostrarVista(v); i++;
+    const p = document.getElementById('progreso'); p.style.transition = 'none'; p.style.width = '0';
+    requestAnimationFrame(() => { p.style.transition = `width ${SEG}s linear`; p.style.width = '100%'; }); };
+  ir(); pres = setInterval(ir, SEG * 1000);
+}
+function pararPresentacion() {
+  if (!pres) return; clearInterval(pres); pres = null;
+  const b = document.getElementById('b-presentar'); b.classList.remove('on'); b.querySelector('span').textContent = 'Presentación';
+  const p = document.getElementById('progreso'); p.style.transition = 'none'; p.style.width = '0';
+}
+document.getElementById('b-presentar').onclick = () => pres ? pararPresentacion() : iniciarPresentacion();
+
+// Teclado: ← → cambian de DJP, F pantalla completa, P presentación, Esc cierra
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') return;
+  if (e.key === 'Escape') { cerrarMenus(); pararPresentacion(); }
+  if (e.key === 'f' || e.key === 'F') document.getElementById('b-pantalla').click();
+  if (e.key === 'p' || e.key === 'P') document.getElementById('b-presentar').click();
+  if ((e.key === 'ArrowRight' || e.key === 'ArrowLeft') && est.vista === 'djp') {
+    const i = DJPS.indexOf(est.djp), n = DJPS.length; irADjp(DJPS[(i + (e.key === 'ArrowRight' ? 1 : n - 1)) % n]);
+  }
+});
+
+// ------------------------------------------------------------------ inicio
+(function iniciar() {
+  document.getElementById('info').textContent = `Datos: ${S.desde.split('-').reverse().join('/')} al ${S.hasta.slice(0, 10).split('-').reverse().join('/')} · ${miles(S.n)} sucesos`;
+  document.getElementById('info').title = `Archivo: ${S.csv}\nTablero preparado: ${S.generado}`;
+  const [d1, d2] = atajos()[0][1]; est.d1 = d1; est.d2 = d2;
+  try { const g = JSON.parse(localStorage.getItem('tablero-sae') || 'null');
+    if (g) { est.vista = g.vista || 'general'; est.djp = DJPS.includes(g.djp) ? g.djp : '2';
+      const a = diaDe(g.d1), b = diaDe(g.d2); if (a >= DIA_MIN && b <= DIA_MAX && a <= b) { est.d1 = a; est.d2 = b; } } } catch (e) {}
+  mapas.general = crearMapa('mapa-general'); mapas.djp = crearMapa('mapa-djp');
+  zonas();
+  mostrarVista(est.vista);
+})();
+</script>
+</body>
+</html>

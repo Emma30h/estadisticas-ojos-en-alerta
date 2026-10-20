@@ -14,3 +14,6 @@ scripts/node_modules/
 .cache_navegador/
 __pycache__/
 *.pyc
+
+# Datos del tablero interactivo (se generan desde el CSV)
+tablero/datos.js

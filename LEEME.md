@@ -49,6 +49,16 @@ python generar_informe.py placa   2026-09-01 2026-09-30
 - Se necesita conexión a internet para el mapa (OpenStreetMap), Chrome o Edge instalado, y Node.js. Las dependencias están en `scripts/node_modules`; si faltan, ejecutar `npm install` en `scripts/`.
 - Las plantillas de fondo, los logos y la tapa se sacaron de los modelos y están en `plantillas/`. El detalle de cada indicador está en `modelos/ESPECIFICACION.md`.
 
+## Tablero interactivo (para mostrar en vivo)
+
+Doble clic en **`abrir_tablero.bat`**: actualiza los datos con el CSV más nuevo y abre `tablero/index.html` en el navegador.
+
+- Mismo diseño que los informes: página General, una por DJP (con el selector "DJP") y la Placa numérica.
+- El recuadro **Periodo** abre atajos (último mes completo, semana viernes–jueves, últimos 7 o 30 días, etc.) o fechas a elección. Todo se recalcula y se anima al instante.
+- Tocando una barra del gráfico por DJP se abre ese DJP. Con el mouse sobre barras y puntos del mapa se ven los detalles. El mapa se puede mover y hacer zoom.
+- **Presentación** recorre solo General → cada DJP → Placa (14 s por página). Teclas: F pantalla completa, P presentación, ← → cambiar de DJP, Esc salir.
+- Los datos quedan en `tablero/datos.js`, que se genera con `python scripts/preparar_tablero.py` y no se sube a GitHub. El mapa y las tipografías necesitan internet.
+
 ## Controlar un CSV nuevo
 
 Antes de usar un CSV nuevo, desde `scripts/`:

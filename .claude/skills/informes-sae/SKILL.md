@@ -64,6 +64,13 @@ Archivos de referencia (leelos solo si hace falta):
    con los mismos nombres que usaban los compañeros (ej. `INFORME MENSUAL(SAE) OCTUBRE.pdf`, `INFORME SEMANAL(SAE) 2-10 AL 8-10.pdf`,
    `Placa numerica mensual (SAE) OCTUBRE.pdf`).
 
+## Tablero interactivo
+
+`BASE/tablero/index.html` replica los informes en el navegador con filtros de fecha y DJP. Si la usuaria pide "actualizá el tablero"
+o va a mostrarlo con un CSV nuevo: corré `python preparar_tablero.py` desde `scripts/` (unos segundos) y decile que abra
+`abrir_tablero.bat` o `tablero/index.html`. Usa las mismas reglas de cálculo que el PDF (portadas a JavaScript en el propio HTML):
+si cambiás una regla en `sae.py` o `generar_informe.py`, replicala también en el tablero.
+
 ## Reglas de cálculo (ya implementadas en `scripts/sae.py`; no las cambies sin consultar)
 
 - Alertas = sucesos con **Fecha Creacion** dentro del período; se descartan Suceso ID repetidos.
