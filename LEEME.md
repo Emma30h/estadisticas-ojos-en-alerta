@@ -59,6 +59,12 @@ Doble clic en **`abrir_tablero.bat`**: actualiza los datos con el CSV más nuevo
 - **Presentación** recorre solo General → cada DJP → Placa (14 s por página). Teclas: F pantalla completa, P presentación, ← → cambiar de DJP, Esc salir.
 - Los datos quedan en `tablero/datos.js`, que se genera con `python scripts/preparar_tablero.py` y no se sube a GitHub. El mapa y las tipografías necesitan internet.
 
+## Consultas a pedido
+
+`python scripts/consultas.py --desde AAAA-MM --por barrio [--filtro ...] [--comparar ...] [--tiempos] [--excel archivo.xlsx]`
+
+Saca tablas por DJP, barrio, cuadrante, tipología, mes, semana, día u hora, con todos los criterios aplicados. Puede comparar contra otro período y exportar a Excel. Para ver todas las opciones: `python scripts/consultas.py -h`.
+
 ## Controlar un CSV nuevo
 
 Antes de usar un CSV nuevo, desde `scripts/`:

@@ -88,10 +88,24 @@ si cambiás una regla en `sae.py` o `generar_informe.py`, replicala también en 
   la usuaria decidió guiarse por los datos del CSV.
 - Semanal: siempre de viernes a jueves.
 
-## Preguntas de estadística sueltas (sin PDF)
+## Trabajos y preguntas a pedido (sin PDF)
 
-Para preguntas como "¿cuántos robos hubo en Alta Córdoba en agosto?" usá las funciones de `scripts/sae.py`
-(`cargar`, `indicadores`, `por_djp`) en un script corto, con el mismo CSV y las mismas reglas.
+Para cualquier pedido distinto de los informes fijos ("robos por barrio en agosto", "comparar septiembre con agosto",
+"tiempos de respuesta por DJP", "ranking de tipologías del DJP 15", "pasame esto en Excel") usá **`scripts/consultas.py`**,
+que ya aplica todos los criterios: DJP, barrio oficial, cuadrante, zona vigente por fecha, etc. Ejemplos:
+```
+python consultas.py --desde 2026-09 --por barrio --filtro "categoria=ROBO" --top 15
+python consultas.py --desde 2026-09 --por djp --comparar 2026-08 --tiempos
+python consultas.py --desde 2026-09-01 --hasta 2026-09-30 --por barrio --por tipo --excel ../informes/NOMBRE.xlsx
+```
+- Dimensiones (`--por`, hasta dos): djp, barrio, cuadrante, tipo, categoria (lo anterior al paréntesis: ROBO, SOSPECHOSO…),
+  mes, semana (viernes a jueves), dia, dia_semana, hora, resultado, barrio_nuevo, en_zona.
+- Filtros: `campo=valor` (exacto) o `campo~texto` (contiene), por ejemplo `positivo=1`, `djp=15`, `barrio=San Vicente`.
+- `--comparar` agrega el período anterior y la variación %. `--tiempos` agrega las medianas de despacho y arribo.
+  Avisá que el arribo solo está cargado en ~1/3 de los sucesos.
+- `--excel` deja una hoja Resumen y una hoja Sucesos (sin teléfonos, nombres ni relatos). Entregalo con SendUserFile.
+- Los totales coinciden con los informes porque usa el mismo filtro de DJP. Si hace falta algo que no cubre, importá `consultas.cargar()` en un script corto.
+- Si el pedido es para mostrar, ofrecé también el tablero (`tablero/index.html`) con el período elegido.
 Para responder por **barrio**, el criterio acordado es:
 - Barrio = nombre de la `Cuadricula` del sistema traducido con `catalogo/equivalencias_barrios.csv`; si no hay cuadrícula, por coordenada (`lat.long`) contra el polígono del KML del programa.
 - Nombres oficiales = los de la web del programa (columna 1 del catálogo); el DJP de un barrio sale del Excel oficial.
