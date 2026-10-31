@@ -17,3 +17,9 @@ __pycache__/
 
 # Datos del tablero interactivo (se generan desde el CSV)
 tablero/datos.js
+
+# Hechos ubicados a mano: IDs del SAE con direcciones (datos operativos, como los CSV)
+catalogo/ubicaciones_manuales.json
+
+# Calles de OpenStreetMap (14 MB, se vuelven a descargar de Overpass)
+fuentes/calles_osm_cordoba.json

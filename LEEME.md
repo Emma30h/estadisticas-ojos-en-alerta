@@ -94,3 +94,7 @@ El proyecto está en un repositorio **privado** de GitHub. **No incluye** los CS
 5. Descargar el CSV del SAE y pedir el informe.
 
 Para guardar cambios (criterios, equivalencias, scripts) y llevarlos a otra PC: `git add -A`, `git commit -m "..."`, `git push`. En la otra PC: `git pull`.
+
+## Mensajes de WhatsApp (hechos ingresados a través del 911)
+
+`python scripts/mensaje_whatsapp.py --operadores luca.bustamante,martina.ariza` arma, desde la "Tabla de Incidentes" más nueva de Descargas, el mensaje **corto** (solo números por zona) y el **detallado** (con tipificaciones y aprehendidos) y los guarda en `informes/`. Zonas en `catalogo/zonas_mensaje.json`; detalle en la skill `informes-sae`.
