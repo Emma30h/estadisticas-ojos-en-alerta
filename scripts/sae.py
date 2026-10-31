@@ -86,7 +86,7 @@ def cargar(path, desde, hasta, corregir_texto=True):
                 lat = lon = None
             out.append({
                 'fecha': fc,
-                'djp': djp,
+                'djp': djp, 'comuna': comuna,
                 'positivo': x[ix['Resultado']].strip() == 'Positivo',
                 'tipo': _fix(x[ix['Tipo y Subtipo']].strip(), corregir_texto),
                 'lat': lat, 'lon': lon,

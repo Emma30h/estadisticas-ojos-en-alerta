@@ -202,16 +202,18 @@ def horas_vertical(horas):
     return ''.join(out)
 
 
-def grafico_djp(por_djp):
-    """Alerta/positivo por DJP (página General): columnas en escala logarítmica."""
-    cats = sorted(sae.DJP_INFORME, key=str) + [sae.FUERA]
-    base = 522.0
+def grafico_djp(por_djp, djps=None):
+    """Alerta/positivo por DJP (página General): columnas en escala logarítmica.
+    Con `djps` (informe de una zona) solo se dibujan esos DJP, repartidos a lo ancho, y sin "Fuera de Cuadrante"."""
+    cats = sorted(sae.DJP_INFORME, key=str) + [sae.FUERA] if djps is None else list(djps)
+    paso = 39.29 if djps is None else 864.0 / len(cats)
+    base = 522.0 if djps is None else 511.5  # en una zona las columnas apoyan sobre la línea gris
     mx = max(por_djp[c][0] for c in cats) or 1
     k = 179.1 / math.log10(mx + 1)
     out, rot = [], []
     for i, c in enumerate(cats):
         a, p = por_djp[c]
-        xa = 35.0 + i * 39.29
+        xa = 35.0 + i * paso + (0 if djps is None else (paso - 26.15) / 2 - 12)
         xp = xa + 13.4
         ha, hp = k * math.log10(a + 1), k * math.log10(p + 1)
         out.append(R(xa, base - ha, 12.75, ha, AZUL_DJP))
@@ -229,13 +231,17 @@ def grafico_djp(por_djp):
             out.append(R(cx - bw / 2, top, bw, 13.5, '#ffffff', 'border-radius:1.5pt;'))
             out.append(T(cx, top + 0.3, 10.5, txt, '#000000', 'middle'))
         etiqueta = 'FUER…' if c == sae.FUERA else c
-        ax, ay = xa + 13.05 + 3.32, 524.74
-        rot.append(f'<text x="{ax:.2f}" y="{ay:.2f}" text-anchor="end" transform="rotate(-30 {ax:.2f} {ay:.2f})">{esc(etiqueta)}</text>')
+        if djps is None:
+            ax, ay = xa + 13.05 + 3.32, 524.74
+            rot.append(f'<text x="{ax:.2f}" y="{ay:.2f}" text-anchor="end" transform="rotate(-30 {ax:.2f} {ay:.2f})">{esc(etiqueta)}</text>')
+        else:  # pocas columnas: etiqueta horizontal y legible, centrada bajo el par
+            rot.append(f'<text x="{xa + 13.05:.2f}" y="526.5" text-anchor="middle" font-size="12" font-weight="bold" fill="#f3f3f3">DJP {esc(etiqueta)}</text>')
     out.append('<svg class="i" style="left:0;top:0;width:930pt;height:1314.96pt;z-index:3" viewBox="0 0 930 1314.96">'
                '<g font-family="Arial" font-size="9.75" fill="#d9d9d9">' + ''.join(rot) + '</g></svg>')
     out.append(R(22.5, 511.5, 876.0, 0.75, '#666666'))
-    out.append(T(852.8, 516.0, 8.25, 'Fuera de', '#d9d9d9'))
-    out.append(T(852.8, 522.8, 8.25, 'Cuadrante', '#d9d9d9'))
+    if djps is None:
+        out.append(T(852.8, 516.0, 8.25, 'Fuera de', '#d9d9d9'))
+        out.append(T(852.8, 522.8, 8.25, 'Cuadrante', '#d9d9d9'))
     return ''.join(out)
 
 
@@ -247,14 +253,14 @@ def mapa(mid, x0, y0, x1, y1, puntos, general, alternativos=()):
 
 # ---------------------------------------------------------------- páginas
 
-def pagina_portada(tipo, d1, d2):
+def pagina_portada(tipo, d1, d2, titulo=None):
     txt = f'({d1:%d/%m/%y} al {d2:%d/%m/%y})'
     return ('<div class="page a4"><img class="bg" src="portada.png">' +
-            T(465, 791.2, 30, f'INFORME {tipo.upper()}', anchor='middle', font="'Open Sans'", weight='700') +
+            T(465, 791.2, 30, titulo or f'INFORME {tipo.upper()}', anchor='middle', font="'Open Sans'", weight='700') +
             T(465, 832.4, 30, txt, anchor='middle', font="'Open Sans'", weight='700') + '</div>')
 
 
-def pagina_general(ind, por_djp, periodo, mid):
+def pagina_general(ind, por_djp, periodo, mid, djps=None):
     o = ['<div class="page a4"><img class="bg" src="fondo_general.png">']
     o.append(T(754.65, 50.0, 13.5, periodo, anchor='middle'))
     o.append(T(871.5, 51.0, 13.5, '▾', extra='transform:scaleX(1.4);'))
@@ -265,7 +271,7 @@ def pagina_general(ind, por_djp, periodo, mid):
     o.append(T(795, 238.2, 36, miles(ind['aprehendidos']), anchor='middle'))
     o.append(R(25.6, 321.8, 18.6, 7.4, AZUL_DJP) + T(49.8, 319.0, 10.5, 'ALERTA POR DJP'))
     o.append(R(147.8, 321.8, 18.6, 7.4, VERDE) + T(172.1, 319.0, 10.5, 'POSITIVO POR DJP'))
-    o.append(grafico_djp(por_djp))
+    o.append(grafico_djp(por_djp, djps))
     o.append(leyenda(72.2, 578.9, 576.6, 8.25, '#d9d9d9', 64.5, AZUL_DIA, 14.6, 5.8))
     o.append(dias_horizontal(ind['dias'], 606.0, 26.6, 5.2, 604.9, cajas=False))
     o.append(leyenda(332.9, 578.4, 576.0, 9.75, '#f3f3f3', 75.0, AZUL_HORA))
@@ -555,7 +561,7 @@ def nombre_archivo(tipo, d1, d2):
     return f'INFORME {tipo.upper()}(SAE) {d1.day}-{d1.month} AL {d2.day}-{d2.month}'
 
 
-def verificar_pdf(pdf_path, tipo):
+def verificar_pdf(pdf_path, tipo, esperadas=None):
     """Controla cantidad de páginas y que cada página DJP tenga su mapa."""
     try:
         import pymupdf
@@ -563,7 +569,7 @@ def verificar_pdf(pdf_path, tipo):
         return []
     d = pymupdf.open(pdf_path)
     avisos = []
-    esperadas = 1 if tipo == 'placa' else 24
+    esperadas = esperadas or (1 if tipo == 'placa' else 24)
     if d.page_count != esperadas:
         avisos.append(f'El PDF tiene {d.page_count} páginas (se esperaban {esperadas}).')
     if tipo != 'placa':
@@ -587,6 +593,8 @@ def main():
     ap.add_argument('hasta', nargs='?')
     ap.add_argument('--csv', help='CSV del SAE (por defecto el más nuevo de fuentes/ o Descargas)')
     ap.add_argument('--no-corregir', action='store_true')
+    ap.add_argument('--djp', help='Informe de una zona: DJP separados por coma (ej. 6,7,8,9,13,17). Excluye "Fuera de Cuadrante".')
+    ap.add_argument('--zona', help='Nombre de la zona para el archivo (ej. ESTE)')
     a = ap.parse_args()
     d1, d2 = resolver_periodo(a.tipo, a.desde, a.hasta)
     csv_path = os.path.abspath(a.csv) if a.csv else csv_mas_nuevo()
@@ -604,14 +612,27 @@ def main():
     os.makedirs(SALIDA, exist_ok=True)
     nombre = nombre_archivo(a.tipo, d1, d2)
     grupos = sae.por_djp(suc)
+    djps = None
+    fuera_zona = None
+    if a.djp:
+        djps = [d.strip() for d in a.djp.split(',')]
+        mal = [d for d in djps if d not in sae.DJP_INFORME]
+        if mal:
+            sys.exit(f'DJP inexistentes en el informe: {mal}')
+        djps = [d for d in sae.DJP_INFORME if d in djps]
+        # Control: los "Fuera de Cuadrante" cuya Comuna es de la zona (no se incluyen en el informe)
+        fuera_zona = sum(1 for s in suc if s['djp'] == sae.FUERA and s.get('comuna') in djps)
+        suc = [s for s in suc if s['djp'] in djps]
+        grupos = {k: v for k, v in grupos.items() if k in djps}
+        nombre += f' ZONA {a.zona.upper()}' if a.zona else ' DJP ' + '-'.join(djps)
     gen = sae.indicadores(suc, n_tipo_positivos=20)
 
     if a.tipo == 'placa':
         paginas, tam = [pagina_placa(sae.indicadores(suc), periodo)], (930, 600)
     else:
         resumen = {k: (len(v), sum(s['positivo'] for s in v)) for k, v in grupos.items()}
-        paginas = [pagina_portada(a.tipo, d1, d2), pagina_general(gen, resumen, periodo, 'm0')]
-        for i, djp in enumerate(sae.DJP_INFORME + [sae.FUERA], 1):
+        paginas = [pagina_portada(a.tipo, d1, d2, 'INFORME' if djps else None), pagina_general(gen, resumen, periodo, 'm0', djps)]
+        for i, djp in enumerate((djps if djps else sae.DJP_INFORME + [sae.FUERA]), 1):
             paginas.append(pagina_djp(djp, sae.indicadores(grupos[djp]), periodo, f'm{i}'))
         tam = (930, 1314.96)
 
@@ -620,7 +641,7 @@ def main():
         f.write(armar_html(paginas, nombre))
     pdf_path = os.path.abspath(os.path.join(SALIDA, nombre + '.pdf'))
     a_pdf(html_path, pdf_path, *tam)
-    avisos += verificar_pdf(pdf_path, a.tipo)
+    avisos += verificar_pdf(pdf_path, a.tipo, 2 + len(djps) if djps and a.tipo != 'placa' else None)
 
     # Resumen para revisar antes de entregar
     print(json.dumps({
@@ -630,7 +651,8 @@ def main():
         'mayores_menores': [gen['mayores'], gen['menores']], 'secuestros': gen['secuestros'],
         'por_djp': {k: [len(v), sum(s['positivo'] for s in v)] for k, v in grupos.items()},
         'djp_sin_alertas': [k for k, v in grupos.items() if not v],
-        'sin_cuadricula_dentro_zona': sin_cuad_dentro(grupos[sae.FUERA]),
+        'sin_cuadricula_dentro_zona': sin_cuad_dentro(grupos[sae.FUERA]) if sae.FUERA in grupos else None,
+        'fuera_de_cuadrante_con_comuna_de_la_zona(excluidos)': fuera_zona,
         'avisos': avisos, 'pdf': pdf_path,
     }, ensure_ascii=False, indent=1))
 
